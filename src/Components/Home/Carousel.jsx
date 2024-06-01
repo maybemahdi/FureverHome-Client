@@ -12,7 +12,7 @@ import Slide from "./Slide";
 
 export default function Carousel() {
   return (
-    <div data-aos="zoom-in" className="my-8">
+    <div className="my-10">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+import { Card, CardHeader, CardBody, Button } from "@material-tailwind/react";
 import SectionStart from "../Shared/SectionStart";
 const About = () => {
   return (
@@ -29,17 +23,22 @@ const About = () => {
           <h6 color="gray" className="mb-4 uppercase">
             About Us
           </h6>
-          <h4 color="blue-gray" className="mb-2 text-3xl text-black font-medium">
-          Adoption Process: How to Bring Your New Best Friend Home
+          <h4
+            color="blue-gray"
+            className="mb-2 text-3xl text-black font-medium"
+          >
+            Adoption Process: How to Bring Your New Best Friend Home
           </h4>
           <h4 color="gray" className="mb-8 font-normal">
-            Like so many organizations these days, Autodesk is a company in
-            transition. It was until recently a traditional boxed software
-            company selling licenses. Yet its own business model disruption is
-            only part of the story
+            Wondering how to start your adoption journey? Learn about our
+            straightforward adoption process, from application to bringing your
+            new pet home, and make a lifelong commitment to love and care.
           </h4>
           <a href="#" className="inline-block">
-            <Button variant="text" className="flex bg-gray-300 hover:bg-[#FF407D] hover:text-white items-center gap-2">
+            <Button
+              variant="text"
+              className="flex bg-gray-300 hover:bg-[#FF407D] hover:text-white items-center gap-2"
+            >
               Learn More
               <svg
                 xmlns="http://www.w3.org/2000/svg"
