@@ -1,0 +1,42 @@
+[
+  {
+    "petImage": "https://i.ibb.co/DkQwdzR/photo-1596492784531-6e6eb5ea9993.jpg",
+    "petName": "Bella",
+    "petAge": 2,
+    "petCategory": "Dog",
+    "petLocation": "New York, NY",
+    "shortDescription": "Friendly and playful puppy.",
+    "longDescription": "Bella is a 2-year-old Labrador Retriever who loves to play and is great with kids. She is vaccinated and spayed. Looking for a loving home where she can get plenty of exercise and attention.",
+    "adopted": false
+  },
+  {
+    "petImage": "https://i.ibb.co/s1kXzVw/photo-1596854407944-bf87f6fdd49e.jpg",
+    "petName": "Max",
+    "petAge": 3,
+    "petCategory": "Cat",
+    "petLocation": "Los Angeles, CA",
+    "shortDescription": "Calm and affectionate cat.",
+    "longDescription": "Max is a 3-year-old domestic shorthair cat. He is very calm and loves to cuddle. He is litter trained and vaccinated. Max would be a perfect companion for someone looking for a relaxed and loving pet.",
+    "adopted": false
+  },
+  {
+    "petImage": "https://i.ibb.co/S05wGyj/photo-1559214369-a6b1d7919865.jpg",
+    "petName": "Charlie",
+    "petAge": 1,
+    "petCategory": "Rabbit",
+    "petLocation": "Chicago, IL",
+    "shortDescription": "Energetic and curious bunny.",
+    "longDescription": "Charlie is a 1-year-old rabbit who loves to explore and hop around. He is very energetic and curious about his surroundings. Charlie is looking for a home where he can get plenty of space to roam and fresh vegetables to munch on.",
+    "adopted": false
+  },
+  {
+    "petImage": "https://i.ibb.co/njF7SSM/photo-1457144759132-40d119c2f120.jpg",
+    "petName": "Luna",
+    "petAge": 5,
+    "petCategory": "Dog",
+    "petLocation": "Miami, FL",
+    "shortDescription": "Loyal and protective German Shepherd.",
+    "longDescription": "Luna is a 5-year-old German Shepherd who is very loyal and protective. She is well-trained and loves to play fetch. Luna is looking for a home with a yard where she can get plenty of exercise and be a part of the family.",
+    "adopted": false
+  }
+]

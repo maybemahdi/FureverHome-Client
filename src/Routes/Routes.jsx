@@ -4,12 +4,14 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import ErrorPage from "../Pages/ErrorPage";
+import PetListings from "../Pages/PetListings";
+import PetDetails from "../Pages/PetDetails";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/petListings",
+        element: <PetListings />,
+      },
+      {
+        path: "/pet/:id",
+        element: <PetDetails/>,
       },
     ],
   },

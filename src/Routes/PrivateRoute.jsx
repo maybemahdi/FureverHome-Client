@@ -1,10 +1,10 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import useAuth from '../Hooks/useAuth'
 import Skeleton from '../Components/Skeleton'
+import useAuth from '../Hooks/useAuth'
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth()
-  const location = useLocation()
+  const location = useLocation();
 
   if (loading) return <Skeleton/>
   if (user) return children

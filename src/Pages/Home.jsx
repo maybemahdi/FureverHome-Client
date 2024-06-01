@@ -6,10 +6,12 @@ import CallToAction from "../Components/Home/CallToAction";
 import About from "../Components/Home/About";
 import Features from "../Components/Home/Features";
 import Faq from "../Components/Home/Faq";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const Home = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   console.log(user?.email);
+  if(loading) return <LoadingSpinner />
   return (
     <div>
       <ScrollRestoration />
