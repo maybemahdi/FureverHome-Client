@@ -4,9 +4,10 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
-  const { googleLogin, signIn, setUpdate, update, loading, setLoading } = useAuth();
+  const { googleLogin, signIn, setUpdate, githubLogin, update, loading, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogin = async (e) => {
@@ -29,6 +30,15 @@ const Login = () => {
       await googleLogin();
       navigate(location.state ? location.state : "/");
       toast.success("Login Successful");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+  const handleGithubLogin = async () => {
+    try {
+      await githubLogin();
+      navigate(location.state ? location.state : "/");
+      toast.success("SignUp Successful");
     } catch (err) {
       toast.error(err.message);
     }
@@ -112,6 +122,14 @@ const Login = () => {
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
+        </button>
+        <button
+          onClick={handleGithubLogin}
+          className="flex justify-center items-center space-x-2 border mx-3 mb-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
+          <FaGithub size={32} />
+
+          <p>Continue with Github</p>
         </button>
         <p className="px-6 text-sm text-center text-gray-600">
           Don&apos;t have an account yet?{" "}

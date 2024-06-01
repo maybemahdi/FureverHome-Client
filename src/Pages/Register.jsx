@@ -3,11 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { updateProfile } from "firebase/auth";
-import { auth } from "../Firebase/firebase.config";
+import { FaGithub } from "react-icons/fa";
 
 const Register = () => {
-  const { createUser, googleLogin, loading, setLoading } = useAuth();
+  const { createUser, googleLogin, loading, githubLogin, updateUserProfile, setLoading } =
+    useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const handleSubmit = async (e) => {
@@ -31,10 +31,7 @@ const Register = () => {
       );
       // console.log(data.data.display_url);
       const result = await createUser(email, password);
-      await updateProfile(auth.currentUser, {
-        name: name,
-        photoURL: data.data.display_url,
-      });
+      await updateUserProfile(name, data.data.display_url);
       console.log(result);
       form.reset();
       navigate(location.state ? location.state : "/");
@@ -43,6 +40,9 @@ const Register = () => {
       setLoading(false);
       console.log(err);
       toast.error(err.message);
+    }finally {
+      // Ensure loading state is turned off after the process is complete
+      setLoading(false);
     }
   };
   const handleGoogleSignIn = async () => {
@@ -54,12 +54,21 @@ const Register = () => {
       toast.error(err.message);
     }
   };
+  const handleGithubLogin = async () => {
+    try {
+      await githubLogin();
+      navigate(location.state ? location.state : "/");
+      toast.success("SignUp Successful");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen my-10">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-200 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-gray-600">Welcome to StayVista</p>
+          <p className="text-sm text-gray-600">Welcome to FureverHome</p>
         </div>
         <form
           onSubmit={handleSubmit}
@@ -148,6 +157,14 @@ const Register = () => {
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
+        </button>
+        <button
+          onClick={handleGithubLogin}
+          className="flex justify-center items-center space-x-2 border mx-3 mb-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
+          <FaGithub size={32} />
+
+          <p>Continue with Github</p>
         </button>
         <p className="px-6 text-sm text-center text-gray-600">
           Already have an account?{" "}

@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [update, setUpdate] = useState(false);
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -25,12 +26,18 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const saveUser = async(user) => {
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
+  const saveUser = async (user) => {
     const userInf = {
-      userName: user?.displayName,
       userEmail: user?.email,
-      userPhoto: user?.photoURL,
       role: "User",
+      status: "Verified",
     };
     const { data } = await axios.post(
       `${import.meta.env.VITE_API_URL}/users`,
@@ -43,7 +50,6 @@ const AuthProvider = ({ children }) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
       setUser(currentUser);
-      setLoading(false);
       if (currentUser) {
         saveUser(currentUser);
         axios
@@ -62,6 +68,7 @@ const AuthProvider = ({ children }) => {
             console.log(res.data);
           });
       }
+      setLoading(false);
     });
     return () => {
       unSubscribe();
@@ -82,6 +89,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     setUpdate,
     update,
+    updateUserProfile,
     user,
     createUser,
     signIn,

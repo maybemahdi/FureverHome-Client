@@ -16,20 +16,24 @@ import {
 } from "@material-tailwind/react";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
-export function StickyNavbar() {
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
-  }, []);
-}
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
   const { user, logOut } = useAuth();
   const [openNav, setOpenNav] = React.useState(false);
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 960) {
+        setOpenNav(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const navList = (
     <ul className="mt-2 mb-4 font-semibold flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li>
@@ -143,6 +147,7 @@ const Nav = () => {
                         withBorder={true}
                         color="blue-gray"
                         className=" p-0.5"
+                        referrerPolicy="no-referrer"
                         src={user?.photoURL}
                       />
                     </Button>
@@ -152,9 +157,7 @@ const Nav = () => {
                       <Link to={"/dashboard"}>Dashboard</Link>
                     </MenuItem>
                     <MenuItem onClick={handleLogOut}>
-                      <button className="text-[#FF407D]">
-                        Log Out
-                      </button>
+                      <button className="text-[#FF407D]">Log Out</button>
                     </MenuItem>
                   </MenuList>
                 </Menu>
@@ -202,14 +205,34 @@ const Nav = () => {
       </div>
       <MobileNav open={openNav} className={`${openNav ? "mt-8" : "mt-2"}`}>
         {navList}
-        <div className="flex items-center gap-x-1">
-          <Button fullWidth variant="text" size="sm" className="">
-            <span>Log In</span>
-          </Button>
-          <Button fullWidth variant="gradient" size="sm" className="">
-            <span>Sign in</span>
-          </Button>
-        </div>
+        {user && (
+          <div className="flex flex-col justify-start -mt-2">
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-[#FF407D]"
+                  : "hover:text-[#FF407D] transition-all duration-300"
+              }
+              to={"/dashboard"}
+            >
+              Dashboard
+            </NavLink>
+            <button
+              onClick={() => {
+                logOut().then(() => {
+                  toast.success("Logged Out Successful");
+                });
+              }}
+              className={
+                "text-[#FF407D] border border-[#FF407D] mt-2 hover:text-[#ffffff] hover:bg-[#FF407D] transition-all duration-300"
+              }
+            >
+              Log Out
+            </button>
+          </div>
+        )}
       </MobileNav>
     </Navbar>
   );
