@@ -6,6 +6,8 @@ import Register from "../Pages/Register";
 import ErrorPage from "../Pages/ErrorPage";
 import PetListings from "../Pages/PetListings";
 import PetDetails from "../Pages/PetDetails";
+import PrivateRoute from "../Routes/PrivateRoute";
+import DonationCampaigns from "../Pages/DonationCampaigns";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +33,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/pet/:id",
-        element: <PetDetails/>,
+        element: (
+          <PrivateRoute>
+            <PetDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/donationCampaigns",
+        element: (
+          <PrivateRoute>
+            <DonationCampaigns />
+          </PrivateRoute>
+        ),
       },
     ],
   },

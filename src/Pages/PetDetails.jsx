@@ -34,9 +34,9 @@ const PetDetails = () => {
     <div className="my-12">
       <ScrollRestoration />
       <SectionStart heading={`All About ${selectedPet?.petName}`} />
-      <Card className="mt-6 w-2/4 mx-auto">
+      <Card className="mt-10 w-[60%] mx-auto">
         <CardHeader color="blue-gray" className="relative">
-          <img src={selectedPet?.petImage} alt="pet-image" />
+          <img className="w-full" src={selectedPet?.petImage} alt="pet-image" />
         </CardHeader>
         <CardBody>
           <div className="mb-2 flex flex-col">
@@ -78,7 +78,7 @@ const PetDetails = () => {
           </Button>
         </CardFooter>
       </Card>
-      <DetailsModal isOpen={isOpen} close={close} pet={selectedPet} />
+      <DetailsModal setIsOpen={setIsOpen} isOpen={isOpen} close={close} pet={selectedPet} />
     </div>
   );
 };

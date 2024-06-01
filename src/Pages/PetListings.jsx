@@ -24,7 +24,6 @@ const PetListings = () => {
     },
   });
 
- 
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-20">
@@ -34,7 +33,6 @@ const PetListings = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
         {pets?.map((pet) => (
-          <>
             <Card key={pet?._id}>
               <CardHeader shadow={false} floated={false} className="h-96">
                 <img
@@ -78,7 +76,6 @@ const PetListings = () => {
                 </Link>
               </CardFooter>
             </Card>
-          </>
         ))}
       </div>
     </div>
