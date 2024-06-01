@@ -1,6 +1,8 @@
 import { ScrollRestoration } from "react-router-dom";
 import Carousel from "../Components/Home/Carousel";
 import useAuth from "../Hooks/useAuth";
+import PetCategory from "../Components/Home/PetCategory";
+import CallToAction from "../Components/Home/CallToAction";
 
 const Home = () => {
     const {user} = useAuth()
@@ -9,6 +11,8 @@ const Home = () => {
         <div>
             <ScrollRestoration/>
             <Carousel/>
+            <PetCategory/>
+            <CallToAction/>
         </div>
     );
 };
