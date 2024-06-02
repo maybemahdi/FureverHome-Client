@@ -15,14 +15,6 @@ import { Link, ScrollRestoration } from "react-router-dom";
 import useCampaigns from "../Hooks/useCampaigns";
 
 const DonationCampaigns = () => {
-  // const axiosCommon = useAxiosCommon();
-  // const { data: donationCampaigns, isLoading } = useQuery({
-  //   queryKey: ["donationCampaigns"],
-  //   queryFn: async () => {
-  //     const { data } = await axiosCommon.get("/donationCampaigns");
-  //     return data;
-  //   },
-  // });
   const { donationCampaigns, isLoading } = useCampaigns();
   if (isLoading) return <LoadingSpinner />;
   return (

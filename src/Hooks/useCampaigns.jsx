@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 const useCampaigns = () => {
   const axiosCommon = useAxiosCommon();
   const { user, loading } = useAuth();
-  const { data: donationCampaigns, isLoading } = useQuery({
+  const { data: donationCampaigns, isLoading, refetch } = useQuery({
     queryKey: ["donationCampaigns"],
     enabled: !loading && !!user,
     queryFn: async () => {
@@ -13,7 +13,7 @@ const useCampaigns = () => {
       return data;
     },
   });
-  return {donationCampaigns, isLoading}
+  return {donationCampaigns, isLoading, refetch}
 };
 
 export default useCampaigns;
