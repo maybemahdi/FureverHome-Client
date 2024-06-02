@@ -11,14 +11,15 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration, useParams } from "react-router-dom";
 
 const PetListings = () => {
   const axiosCommon = useAxiosCommon();
+  const { category } = useParams();
   const { data: pets = [], isLoading } = useQuery({
-    queryKey: ["allPets"],
+    queryKey: ["allPets", category],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/pets");
+      const { data } = await axiosCommon.get(`/pets?category=${category}`);
       return data;
     },
   });
@@ -26,12 +27,14 @@ const PetListings = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-10">
+      <ScrollRestoration />
       <SectionStart
         heading={`Explore Our Wonderful Pets`}
         subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
-        {pets?.map((pet) => (
+      {pets?.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
+          {pets?.map((pet) => (
             <Card key={pet?._id}>
               <CardHeader shadow={false} floated={false} className="h-96">
                 <img
@@ -75,8 +78,16 @@ const PetListings = () => {
                 </Link>
               </CardFooter>
             </Card>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+      {pets?.length < 1 && (
+        <div className="min-h-[300px] flex justify-center items-center">
+          <h2 className="text-3xl text-center text-[#FF407D] font-bold">
+            No Pets Found In this Category!
+          </h2>
+        </div>
+      )}
     </div>
   );
 };
