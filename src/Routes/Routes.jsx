@@ -9,6 +9,13 @@ import PetDetails from "../Pages/PetDetails";
 import PrivateRoute from "../Routes/PrivateRoute";
 import DonationCampaigns from "../Pages/DonationCampaigns";
 import DonationDetails from "../Pages/DonationDetails";
+import DashboardLayout from "../Layout/DashboardLayout";
+import AddPet from "../Pages/User/AddPet";
+import MyAddedPets from "../Pages/User/MyAddedPets";
+import AdopReq from "../Pages/User/AdopReq";
+import CreateDonationCampaign from "../Pages/User/CreateDonationCampaign";
+import MyDonationCampaigns from "../Pages/User/MyDonationCampaigns";
+import MyDonations from "../Pages/User/MyDonations";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/pet/category/:category",
-        element: <PetListings/>,
+        element: <PetListings />,
       },
       {
         path: "/pet/:id",
@@ -57,6 +64,62 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <DonationDetails />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  //dashboard layout
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <AddPet />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myAddedPets",
+        element: (
+          <PrivateRoute>
+            <MyAddedPets/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "adoptionRequests",
+        element: (
+          <PrivateRoute>
+            <AdopReq/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "createCampaign",
+        element: (
+          <PrivateRoute>
+            <CreateDonationCampaign/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myDonationCampaign",
+        element: (
+          <PrivateRoute>
+            <MyDonationCampaigns/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myDonations",
+        element: (
+          <PrivateRoute>
+            <MyDonations/>
           </PrivateRoute>
         ),
       },

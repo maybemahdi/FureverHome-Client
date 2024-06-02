@@ -6,7 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Menu,
@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const navigate = useNavigate();
   const { user, logOut } = useAuth();
   const [openNav, setOpenNav] = React.useState(false);
   React.useEffect(() => {
@@ -152,9 +153,9 @@ const Nav = () => {
                       />
                     </Button>
                   </MenuHandler>
-                  <MenuList className="p-1">
-                    <MenuItem>
-                      <Link to={"/dashboard"}>Dashboard</Link>
+                  <MenuList className="p-1 hidden lg:block">
+                    <MenuItem onClick={() => navigate("/dashboard")}>
+                      <button className="text-[#000000]">Dashboard</button>
                     </MenuItem>
                     <MenuItem onClick={handleLogOut}>
                       <button className="text-[#FF407D]">Log Out</button>

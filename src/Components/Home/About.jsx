@@ -34,7 +34,6 @@ const About = () => {
             straightforward adoption process, from application to bringing your
             new pet home, and make a lifelong commitment to love and care.
           </h4>
-          <a href="#" className="inline-block">
             <Button
               variant="text"
               className="flex bg-gray-300 hover:bg-[#FF407D] hover:text-white items-center gap-2"
@@ -55,7 +54,6 @@ const About = () => {
                 />
               </svg>
             </Button>
-          </a>
         </CardBody>
       </Card>
     </div>
