@@ -13,6 +13,7 @@ const AdoptForm = ({ pet, setIsOpen }) => {
       const { data } = await axiosCommon.post("/adoptionRequests", info);
       if (data?.message) {
         toast.success(data.message);
+        setIsOpen(false);
       }
       return data;
     },
@@ -22,6 +23,7 @@ const AdoptForm = ({ pet, setIsOpen }) => {
         text: "Your Request Has Been Sent!",
         icon: "success",
       });
+      setIsOpen(false);
     },
     onError: (err) => {
       toast.error(err.message);

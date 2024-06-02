@@ -1,7 +1,9 @@
 [
   {
-    "petImage": "https://i.ibb.co/S05wGyj/photo-1559214369-a6b1d7919865.jpg",
+    "petImage": "https://i.ibb.co/DkQwdzR/photo-1596492784531-6e6eb5ea9993.jpg",
+    "petName": "Bella",
     "maxDonationAmount": 5000,
+    "donatedAmount": 0,
     "lastDateOfDonation": "2024-12-31",
     "shortDescription": "Help Bella get the surgery she needs!",
     "longDescription": "Bella is a playful and loving dog who needs surgery to correct a hip dysplasia. Your donations will go directly towards her medical bills and post-surgery care.",
@@ -9,16 +11,20 @@
   },
   {
     "petImage": "https://i.ibb.co/s1kXzVw/photo-1596854407944-bf87f6fdd49e.jpg",
+    "petName": "Whiskers",
     "maxDonationAmount": 3000,
-    "lastDateOfDonation": "2024-11-30",
+    "donatedAmount": 0,
+    "lastDateOfDonation": "2025-10-15",
     "shortDescription": "Support Whiskers' recovery",
     "longDescription": "Whiskers, a sweet and friendly cat, was injured in an accident. She requires extensive treatment and rehabilitation. Your support will help her get back on her feet and find a loving home.",
     "creator": "mh7266391@gmail.com"
   },
   {
-    "petImage": "https://i.ibb.co/DkQwdzR/photo-1596492784531-6e6eb5ea9993.jpg",
+    "petImage": "https://i.ibb.co/S05wGyj/photo-1559214369-a6b1d7919865.jpg",
+    "petName": "Charlie",
     "maxDonationAmount": 10000,
-    "lastDateOfDonation": "2024-10-15",
+    "donatedAmount": 0,
+    "lastDateOfDonation": "2024-12-30",
     "shortDescription": "Help Charlie fight cancer",
     "longDescription": "Charlie, a brave and affectionate dog, has been diagnosed with cancer. He needs chemotherapy and ongoing treatment to survive. Your generous donations will help cover his medical expenses and give him a fighting chance.",
     "creator": "mh7266391@gmail.com"

@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 
 const Skeleton = () => {
     return (
-        <div className="flex animate-pulse w-full flex-wrap items-center gap-8">
+        <div className="flex animate-pulse my-10 w-full flex-wrap items-center gap-8">
         <div className="grid h-36 w-36 place-items-center rounded-lg bg-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -11,7 +11,6 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const PetListings = () => {
@@ -26,7 +25,7 @@ const PetListings = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <div className="my-20">
+    <div className="my-10">
       <SectionStart
         heading={`Explore Our Wonderful Pets`}
         subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}

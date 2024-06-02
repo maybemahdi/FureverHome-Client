@@ -18,10 +18,10 @@ const Slide = ({ image, text, para }) => {
           </p>
           <br />
           <Link
-            to={"/add-pet"}
+            to={"/petListings"}
             className="px-5 py-4 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform border border-[#FF407D] bg-[#ffffff00] hover:bg-[#FF407D] rounded-md lg:w-auto focus:outline-none focus:bg-gray-500"
           >
-            Add a Pet
+            Pet Listings
           </Link>
         </div>
       </div>

@@ -31,15 +31,18 @@ const PetDetails = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <div className="my-12">
+    <div className="my-10">
       <ScrollRestoration />
       <SectionStart heading={`All About ${selectedPet?.petName}`} />
-      <Card className="mt-10 w-[60%] mx-auto">
-        <CardHeader color="blue-gray" className="relative">
+      <Card className="mt-5 mb-10 flex flex-col lg:flex-row lg:w-[70%] mx-auto">
+        <CardHeader
+          color="blue-gray"
+          className="relative m-0 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"
+        >
           <img className="w-full" src={selectedPet?.petImage} alt="pet-image" />
         </CardHeader>
-        <CardBody>
-          <div className="mb-2 flex flex-col">
+        <CardBody className="flex flex-col justify-center">
+          <div className="mb-2 flex flex-col gap-2">
             <Typography color="blue-gray" className="font-medium font-main">
               Name: <span className="font-bold">{selectedPet?.petName}</span>
             </Typography>
@@ -66,8 +69,6 @@ const PetDetails = () => {
               <span className="">{selectedPet?.longDescription}</span>
             </Typography>
           </div>
-        </CardBody>
-        <CardFooter className="pt-0">
           <Button
             onClick={() => {
               setIsOpen(true);
@@ -76,13 +77,16 @@ const PetDetails = () => {
           >
             Adopt {selectedPet?.petName}
           </Button>
-        </CardFooter>
+        </CardBody>
       </Card>
-      <DetailsModal setIsOpen={setIsOpen} isOpen={isOpen} close={close} pet={selectedPet} />
+      <DetailsModal
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        close={close}
+        pet={selectedPet}
+      />
     </div>
   );
 };
 
 export default PetDetails;
-
-
