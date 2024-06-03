@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import logo from "../../assets/logo.png";
 import useRole from "../../Hooks/useRole";
 import UserMenu from "./Menu/UserMenu";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -52,7 +53,7 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden h-16 md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
+            <div className="w-full hidden h-[85px] md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
               <Link to="/">
                 <img
                   // className='hidden md:block'
@@ -70,9 +71,7 @@ const Sidebar = () => {
             {/* Conditional toggle button here.. */}
 
             {/*  Menu Items */}
-            {role === "User" && (
-              <UserMenu/>
-            )}
+            {role === "User" && <UserMenu />}
           </div>
         </div>
 
@@ -93,7 +92,12 @@ const Sidebar = () => {
             <span className="mx-4 font-medium">Profile</span>
           </NavLink>
           <button
-            onClick={logOut}
+            title="Log Out"
+            onClick={() => {
+              logOut().then(() => {
+                toast.success("Logged out Successful");
+              });
+            }}
             className="flex w-full items-center px-4 py-2 mt-5 text-black transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />

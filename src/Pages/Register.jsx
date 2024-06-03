@@ -6,8 +6,14 @@ import axios from "axios";
 import { FaGithub } from "react-icons/fa";
 
 const Register = () => {
-  const { createUser, googleLogin, loading, githubLogin, updateUserProfile, setLoading } =
-    useAuth();
+  const {
+    createUser,
+    googleLogin,
+    loading,
+    githubLogin,
+    updateUserProfile,
+    setLoading,
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const handleSubmit = async (e) => {
@@ -40,7 +46,7 @@ const Register = () => {
       setLoading(false);
       console.log(err);
       toast.error(err.message);
-    }finally {
+    } finally {
       // Ensure loading state is turned off after the process is complete
       setLoading(false);
     }
