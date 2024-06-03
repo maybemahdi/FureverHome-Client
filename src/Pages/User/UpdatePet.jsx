@@ -5,12 +5,12 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ImSpinner9 } from "react-icons/im";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration, useParams } from "react-router-dom";
 
 const options = [
   { value: "Dog", label: "Dog" },
@@ -18,7 +18,15 @@ const options = [
   { value: "Rabbit", label: "Rabbit" },
 ];
 
-const AddPet = () => {
+const UpdatePet = () => {
+  const { id } = useParams();
+  const { data: selectedPet, refetch } = useQuery({
+    queryKey: ["singlePet", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/pet/${id}`);
+      return data;
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -32,17 +40,18 @@ const AddPet = () => {
   const axiosCommon = useAxiosCommon();
   const { mutateAsync } = useMutation({
     mutationFn: async (petData) => {
-      const { data } = await axiosCommon.post("/pets", petData);
+      const { data } = await axiosCommon.put(`/pets/${id}`, petData);
       return data;
     },
     onSuccess: () => {
       Swal.fire({
         title: "Success!",
-        text: "You just added a pet!",
+        text: "You just updated this pet!",
         icon: "success",
       });
+      refetch()
       reset();
-      setPreview(null)
+      setPreview(null);
     },
     onError: (err) => {
       toast.error(err.message);
@@ -50,12 +59,16 @@ const AddPet = () => {
   });
   const onSubmit = async (data) => {
     const petData = {
-      ...data,
+      petName: data.petName || selectedPet?.petName,
+      petAge: data.petAge || selectedPet?.petAge,
+      petLocation: data.petLocation || selectedPet?.petLocation,
+      shortDescription: data.shortDescription || selectedPet?.shortDescription,
+      longDescription: data.longDescription || selectedPet?.longDescription,
       petCategory: selectedOption?.value,
-      petImage: preview,
+      petImage: preview || selectedPet?.petImage,
       adopted: false,
       provider: user?.email,
-      timestamp: Date.now(),
+      timestamp: selectedPet?.timestamp || Date.now(),
     };
     await mutateAsync(petData);
   };
@@ -82,15 +95,16 @@ const AddPet = () => {
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration/>
-      <SectionStart heading={`Add Your Pet`} />
+      <SectionStart heading={`Update Your Pet`} />
       <div className=" p-4 w-full md:w-3/4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center md:flex-row gap-6 mb-5">
             <div className="basis-1/2">
               <Input
                 label="Pet Name"
+                defaultValue={selectedPet?.petName}
                 placeholder="Enter Your Pet Name"
-                {...register("petName", { required: true })}
+                {...register("petName")}
                 type="text"
               />
               {errors.petName && (
@@ -103,8 +117,9 @@ const AddPet = () => {
               <Input
                 label="Pet Age"
                 placeholder="Enter Your Pet Age"
+                defaultValue={selectedPet?.petAge}
                 name="petAge"
-                {...register("petAge", { required: true })}
+                {...register("petAge")}
                 type="number"
               />
               {errors.petAge && (
@@ -158,7 +173,11 @@ const AddPet = () => {
             <div className="basis-1/2 w-full">
               <Select
                 className="w-full"
-                defaultValue={selectedOption}
+                defaultValue={selectedOption || selectedPet?.petCategory}
+                value={{
+                  label: selectedPet?.petCategory,
+                  value: selectedPet?.petCategory,
+                }}
                 onChange={setSelectedOption}
                 required
                 // {...register("category", { required: true })}
@@ -179,7 +198,8 @@ const AddPet = () => {
                 label="Location"
                 placeholder="Enter Your Pet Location"
                 name="petLocation"
-                {...register("petLocation", { required: true })}
+                defaultValue={selectedPet?.petLocation}
+                {...register("petLocation")}
                 type="text"
               />
               {errors.petLocation && (
@@ -193,7 +213,8 @@ const AddPet = () => {
                 label="Short Description"
                 placeholder="Write Short Description"
                 name="shortDescription"
-                {...register("shortDescription", { required: true })}
+                defaultValue={selectedPet?.shortDescription}
+                {...register("shortDescription")}
                 type="text"
               />
               {errors.shortDescription && (
@@ -206,7 +227,8 @@ const AddPet = () => {
           <div className="flex flex-col w-full items-center md:flex-row gap-6 mb-5">
             <div className="flex flex-col w-full">
               <Textarea
-                {...register("longDescription", { required: true })}
+                defaultValue={selectedPet?.longDescription}
+                {...register("longDescription")}
                 color="gray"
                 className="w-full"
                 label="Long Description"
@@ -219,7 +241,7 @@ const AddPet = () => {
             </div>
           </div>
           <Button type="submit" className="bg-[#FF407D] w-full">
-            Add Pet
+            Update Pet
           </Button>
         </form>
       </div>
@@ -227,4 +249,4 @@ const AddPet = () => {
   );
 };
 
-export default AddPet;
+export default UpdatePet;

@@ -18,7 +18,7 @@ const PetDetails = () => {
   const axiosCommon = useAxiosCommon();
   const { id } = useParams();
   const { data: selectedPet, isLoading } = useQuery({
-    queryKey: ["singlePet"],
+    queryKey: ["singlePet", id],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/pet/${id}`);
       return data;

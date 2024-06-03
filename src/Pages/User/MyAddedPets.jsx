@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import SectionStart from "../../Components/Shared/SectionStart";
 import { Card } from "@material-tailwind/react";
 import {
@@ -7,20 +7,27 @@ import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useMemo, useState } from "react";
 import LoadingSpinner from "../../Components/LoadingSpinner";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 import { FiEdit3 } from "react-icons/fi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MyAddedPets = () => {
   const { user } = useAuth();
   const axiosCommon = useAxiosCommon();
 
-  const { data: myAddedPets = [], isLoading } = useQuery({
+  const {
+    data: myAddedPets = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["myAddedPets"],
     queryFn: async () => {
       if (user?.email) {
@@ -70,7 +77,7 @@ const MyAddedPets = () => {
         accessorKey: "update",
         cell: ({ row }) => (
           <Link
-            to={`/updatePet/${row.original._id}`}
+            to={`/dashboard/updatePet/${row.original._id}`}
             title="Update"
             className="flex -ml-6 items-center justify-center "
           >
@@ -81,8 +88,11 @@ const MyAddedPets = () => {
       {
         header: "Delete",
         accessorKey: "delete",
-        cell: () => (
-          <button className="bg-[#FF407D] text-white p-2 rounded hover:bg-[#d15079]">
+        cell: ({ row }) => (
+          <button
+            onClick={() => handleDelete(row.original._id)}
+            className="bg-[#FF407D] text-white p-2 rounded hover:bg-[#d15079]"
+          >
             <RiDeleteBin6Fill size={20} />
           </button>
         ),
@@ -90,15 +100,86 @@ const MyAddedPets = () => {
       {
         header: "Adopted",
         accessorKey: "adoptedBtn",
-        cell: () => (
-          <button className="bg-[#FF407D] text-white p-2 rounded hover:bg-[#d15079]">
-            Adopted
+        cell: ({ row }) => (
+          <button
+            disabled={row.original.adopted}
+            onClick={() => handleAdopted(row.original._id)}
+            className="bg-[#FF407D] disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 text-white p-2 rounded hover:bg-[#d15079]"
+          >
+            Mark as Adopted
           </button>
         ),
       },
     ],
     []
   );
+
+  //delete
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosCommon.delete(`/pet/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your Pet has been deleted.",
+        icon: "success",
+      });
+      refetch();
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await mutateAsync(id);
+      }
+    });
+  };
+
+  //patch adopted to true
+  const handleAdopted = (id) => {
+    Swal.fire({
+      title: "Is That Already Adopted?",
+      text: "If Yes then Click Yes, Otherwise Don't!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, its Adopted!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await axiosCommon.patch(`/pet/${id}`, {
+            adopted: true,
+          });
+          if (data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Success!",
+              text: "Marked as Adopted.",
+              icon: "success",
+            });
+            refetch();
+          } else {
+            toast.success("Marked As Adopted");
+          }
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }
+    });
+  };
 
   const [sorting, setSorting] = useState([]);
 
@@ -107,15 +188,22 @@ const MyAddedPets = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       sorting: sorting,
     },
     onSortingChange: setSorting,
+    initialState: {
+      pagination: {
+        pageSize: 10, // Set the initial page size to 4
+      },
+    },
   });
 
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <ScrollRestoration />
       <SectionStart heading={`My Added Pets`} />
       <div className="my-10">
         <Card className="h-full w-full overflow-scroll md:overflow-hidden">
@@ -169,6 +257,36 @@ const MyAddedPets = () => {
               )}
             </tbody>
           </table>
+          {myAddedPets.length > 10 && (
+            <div className="flex">
+              <button
+                onClick={() => table.setPageIndex(0)}
+                className="p-3 m-2 border border-gray-200 rounded bg-[#FF407D] text-white hover:bg-[#d15079]"
+              >
+                First Page
+              </button>
+              <button
+                disabled={!table.getCanPreviousPage()}
+                onClick={() => table.previousPage()}
+                className="p-3 m-2 disabled:bg-gray-400 border border-gray-200 rounded bg-[#FF407D] text-white hover:bg-[#d15079]"
+              >
+                Previous Page
+              </button>
+              <button
+                disabled={!table.getCanNextPage()}
+                onClick={() => table.nextPage()}
+                className="p-3 m-2 disabled:bg-gray-400 border border-gray-200 rounded bg-[#FF407D] text-white hover:bg-[#d15079]"
+              >
+                Next Page
+              </button>
+              <button
+                onClick={() => table.setPageIndex(table.getPageCount - 1)}
+                className="p-3 m-2 border border-gray-200 rounded bg-[#FF407D] text-white hover:bg-[#d15079]"
+              >
+                Last Page
+              </button>
+            </div>
+          )}
         </Card>
       </div>
     </div>
