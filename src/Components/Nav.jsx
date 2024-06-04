@@ -88,7 +88,7 @@ const Nav = () => {
     });
   };
   return (
-    <Navbar className="sticky bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
+    <Navbar className=" bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
       <div className="flex items-center justify-between z-20 relative">
         <Link to={"/"}>
           <img

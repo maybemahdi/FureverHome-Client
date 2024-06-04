@@ -22,36 +22,10 @@ const TABLE_HEAD = [
   "Edit/Update",
   "Donators",
 ];
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
 
 const MyDonationCampaigns = () => {
   const axiosCommon = useAxiosCommon();
+  const [id, setId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const {
@@ -134,7 +108,7 @@ const MyDonationCampaigns = () => {
       <ScrollRestoration />
       <SectionStart heading={`My Donation Campaigns`} />
       <div className="my-10">
-        <Card className="h-full w-full overflow-scroll lg:overflow-hidden">
+        <Card className="h-full md:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
@@ -156,14 +130,14 @@ const MyDonationCampaigns = () => {
             </thead>
             <tbody>
               {myCamp?.map(
-                (
-                  { petName, maxDonationAmount, donatedAmount, _id, status },
-                  index
-                ) => {
-                  const isLast = index === TABLE_ROWS?.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
+                ({
+                  petName,
+                  maxDonationAmount,
+                  donatedAmount,
+                  _id,
+                  status,
+                }) => {
+                  const classes = "p-4 border-b border-blue-gray-50";
 
                   return (
                     <tr key={petName}>
@@ -221,14 +195,15 @@ const MyDonationCampaigns = () => {
                       </td>
                       <td className={classes}>
                         <button
-                          onClick={() => setIsOpen(true)}
+                          onClick={() => {
+                            setId(_id);
+                            setIsOpen(true);
+                          }}
                           className="bg-[#FF407D] text-white p-2 rounded"
                         >
                           View Donators
                         </button>
                       </td>
-                      {/* modal   */}
-                      <DonatorsModal isOpen={isOpen} setIsOpen={setIsOpen} close={close} />
                     </tr>
                   );
                 }
@@ -236,6 +211,13 @@ const MyDonationCampaigns = () => {
             </tbody>
           </table>
         </Card>
+        {/* modal   */}
+        <DonatorsModal
+          id={id}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          close={close}
+        />
       </div>
     </div>
   );

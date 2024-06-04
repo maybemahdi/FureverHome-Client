@@ -7,9 +7,21 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Button } from "@material-tailwind/react";
+import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import LoadingSpinner from "../LoadingSpinner";
 
-const DonatorsModal = ({ isOpen, close, setIsOpen }) => {
+const DonatorsModal = ({ isOpen, close, setIsOpen, id }) => {
+  const axiosCommon = useAxiosCommon();
+  const { data: donations = [], isLoading } = useQuery({
+    queryKey: ["donations", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/donationData/${id}`);
+      return data;
+    },
+  });
+  if (isLoading) return <LoadingSpinner />;
   return (
     <>
       <Transition appear show={isOpen}>
@@ -30,23 +42,54 @@ const DonatorsModal = ({ isOpen, close, setIsOpen }) => {
                 leaveTo="opacity-0"
               >
                 <DialogPanel className="w-full max-w-md rounded-xl bg-white text-black p-6 backdrop-blur-2xl">
-                  <DialogTitle
-                    as="h3"
-                    className="text-[20px] text-center font-medium"
-                  >
-                    All Donators
-                  </DialogTitle>
-                  <div className="flex justify-around my-10">
-                    <div>Email</div>
-                    <div>Amount</div>
-                  </div>
+                  {donations?.length > 0 ? (
+                    <DialogTitle
+                      as="h3"
+                      className="text-[20px] font-medium"
+                    >
+                      All Donators
+                    </DialogTitle>
+                  ) : (
+                    <DialogTitle
+                      as="h3"
+                      className="text-[20px] text-red-500 text-center font-medium"
+                    >
+                      No Donator Found Yet
+                    </DialogTitle>
+                  )}
+                  {donations?.length > 0 && (
+                    <>
+                      <div className="flex justify-between mt-5 font-bold">
+                        <div>Name</div>
+                        <div>Email</div>
+                        <div>Amount</div>
+                      </div>
+                      <div className="flex justify-between mb-5 mt-2">
+                        <div>
+                          {donations?.map((donation, idx) => (
+                            <p key={idx}>{donation.donarName}</p>
+                          ))}
+                        </div>
+                        <div>
+                          {donations?.map((donation, idx) => (
+                            <p key={idx}>{donation.donarEmail}</p>
+                          ))}
+                        </div>
+                        <div>
+                          {donations?.map((donation, idx) => (
+                            <p key={idx}>${donation.donatedAmount}</p>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
                   <div className="mt-4">
                     <Button
-                        onClick={() => {
-                          setIsOpen(false);
-                        }}
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
                       type="submit"
-                      className="bg-[#FF407D] w-full p-3 text-white hover:bg-[#b33f64] rounded cursor-pointer"
+                      className="bg-[#FF407D] w-full p-3 text-white hover:bg-[#b33f64] rounded cursor-auto"
                     >
                       Okay! Close
                     </Button>

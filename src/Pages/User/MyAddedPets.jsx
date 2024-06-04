@@ -206,7 +206,7 @@ const MyAddedPets = () => {
       <ScrollRestoration />
       <SectionStart heading={`My Added Pets`} />
       <div className="my-10">
-        <Card className="h-full w-full overflow-scroll md:overflow-hidden">
+        <Card className="h-full lg:w-[90%] mx-auto overflow-scroll xl:overflow-hidden">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
