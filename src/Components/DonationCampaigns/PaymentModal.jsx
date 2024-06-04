@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 
 const PaymentModal = ({ isOpen, setIsOpen, close, campaign, refetch }) => {
   const [amount, setAmount] = useState("");
-//   console.log(amount);
+  //   console.log(amount);
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
   return (
     <>
@@ -51,7 +51,7 @@ const PaymentModal = ({ isOpen, setIsOpen, close, campaign, refetch }) => {
                           setAmount(e.target.value);
                         } else {
                           toast.error("Set Amount less or Equal to Max Amount");
-                          setAmount("")
+                          setAmount("");
                         }
                       }}
                       max={campaign?.maxDonationAmount}
@@ -61,7 +61,7 @@ const PaymentModal = ({ isOpen, setIsOpen, close, campaign, refetch }) => {
                     <Elements stripe={stripePromise}>
                       {/* checkout form */}
                       <CheckoutForm
-                      refetch={refetch}
+                        refetch={refetch}
                         campaign={campaign}
                         amount={amount}
                         setAmount={setAmount}

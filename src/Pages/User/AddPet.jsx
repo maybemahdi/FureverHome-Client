@@ -83,10 +83,10 @@ const AddPet = () => {
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration/>
       <SectionStart heading={`Add Your Pet`} />
-      <div className=" p-4 w-full md:w-3/4 mx-auto">
+      <div className="p-4 w-full md:w-3/4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center md:flex-row gap-6 mb-5">
-            <div className="basis-1/2">
+            <div className="basis-1/2 w-full">
               <Input
                 label="Pet Name"
                 placeholder="Enter Your Pet Name"
@@ -99,7 +99,7 @@ const AddPet = () => {
                 </p>
               )}
             </div>
-            <div className="basis-1/2">
+            <div className="basis-1/2 w-full">
               <Input
                 label="Pet Age"
                 placeholder="Enter Your Pet Age"

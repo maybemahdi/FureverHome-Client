@@ -4,16 +4,15 @@ import { Button, Input, Textarea } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ImSpinner9 } from "react-icons/im";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-import { ScrollRestoration } from "react-router-dom";
-
-
-
-const CreateDonationCampaign = () => {
+import { ScrollRestoration, useParams } from "react-router-dom";
+import LoadingSpinner from "../../Components/LoadingSpinner";
+const EditDonation = () => {
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
@@ -24,18 +23,30 @@ const CreateDonationCampaign = () => {
   const [preview, setPreview] = useState(null);
   const [imgLoading, setImgLoading] = useState(false);
   const axiosCommon = useAxiosCommon();
+  const {
+    data: selectedCamp,
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["selectedCamp", id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/campaign/${id}`);
+      return data;
+    },
+  });
   const { mutateAsync } = useMutation({
     mutationFn: async (petData) => {
-      const { data } = await axiosCommon.post("/campaigns", petData);
+      const { data } = await axiosCommon.put(`/campaigns/${id}`, petData);
       return data;
     },
     onSuccess: () => {
       Swal.fire({
         title: "Success!",
-        text: "You just Created a Campaign!",
+        text: "You just Updated a Campaign!",
         icon: "success",
       });
       reset();
+      refetch();
       setPreview(null);
     },
     onError: (err) => {
@@ -44,13 +55,18 @@ const CreateDonationCampaign = () => {
   });
   const onSubmit = async (data) => {
     const petData = {
-      ...data,
-      maxDonationAmount: parseFloat(data.maxDonationAmount),
-      donatedAmount: 0,
-      petImage: preview,
-      status: "running",
-      creator: user?.email,
-      timestamp: Date.now(),
+      petName: data.petName || selectedCamp?.petName,
+      maxDonationAmount:
+        parseFloat(data.maxDonationAmount) || selectedCamp?.maxDonationAmount,
+      donatedAmount: selectedCamp?.donatedAmount,
+      petImage: preview || selectedCamp?.petImage,
+      lastDateOfDonation:
+        data.lastDateOfDonation || selectedCamp?.lastDateOfDonation,
+      shortDescription: data.shortDescription || selectedCamp?.shortDescription,
+      longDescription: data.longDescription || selectedCamp?.longDescription,
+      status: selectedCamp?.status,
+      creator: selectedCamp?.creator || user?.email,
+      timestamp: selectedCamp?.timestamp || Date.now(),
     };
     await mutateAsync(petData);
   };
@@ -74,10 +90,11 @@ const CreateDonationCampaign = () => {
       setImgLoading(false);
     }
   };
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />
-      <SectionStart heading={`Create Donation Campaign`} />
+      <SectionStart heading={`Update Donation Campaign`} />
       <div className=" p-4 w-full md:w-3/4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col items-center md:flex-row gap-6 mb-5">
@@ -85,6 +102,7 @@ const CreateDonationCampaign = () => {
               <Input
                 label="Pet Name"
                 placeholder="Enter Your Pet Name"
+                defaultValue={selectedCamp?.petName}
                 {...register("petName", { required: true })}
                 type="text"
               />
@@ -98,6 +116,7 @@ const CreateDonationCampaign = () => {
               <Input
                 label="Max Donation Amount"
                 placeholder="Max Donation Amount"
+                defaultValue={selectedCamp?.maxDonationAmount}
                 name="maxDonationAmount"
                 {...register("maxDonationAmount", { required: true })}
                 type="number"
@@ -155,6 +174,7 @@ const CreateDonationCampaign = () => {
                 label="Last Date of Donation"
                 placeholder="Last Date of Donation"
                 name="lastDateOfDonation"
+                defaultValue={selectedCamp?.lastDateOfDonation}
                 {...register("lastDateOfDonation", { required: true })}
                 type="date"
               />
@@ -171,6 +191,7 @@ const CreateDonationCampaign = () => {
                 label="Short Description"
                 placeholder="Write Short Description"
                 name="shortDescription"
+                defaultValue={selectedCamp?.shortDescription}
                 {...register("shortDescription", { required: true })}
                 type="text"
               />
@@ -187,6 +208,7 @@ const CreateDonationCampaign = () => {
                 {...register("longDescription", { required: true })}
                 color="gray"
                 className="w-full"
+                defaultValue={selectedCamp?.longDescription}
                 label="Long Description"
               />
               {errors.longDescription && (
@@ -197,7 +219,7 @@ const CreateDonationCampaign = () => {
             </div>
           </div>
           <Button type="submit" className="bg-[#FF407D] w-full">
-            Create Campaign
+            Update Campaign
           </Button>
         </form>
       </div>
@@ -205,4 +227,4 @@ const CreateDonationCampaign = () => {
   );
 };
 
-export default CreateDonationCampaign;
+export default EditDonation;

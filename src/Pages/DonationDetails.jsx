@@ -112,12 +112,13 @@ const DonationDetails = () => {
             </Typography>
           </div>
           <Button
+          disabled={selectedCampaign?.status === "paused"}
             onClick={() => {
               setIsOpen(true);
             }}
-            className="bg-[#FF407D] mt-4"
+            className="bg-[#FF407D] mt-4 disabled:cursor-not-allowed"
           >
-            Donate Now
+            {selectedCampaign?.status === "paused" ? "Paused" : "Donate Now"}
           </Button>
         </CardBody>
       </Card>
@@ -132,58 +133,60 @@ const DonationDetails = () => {
         <SectionStart heading={`Recommended Campaigns!`} />
         <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
           {donationCampaigns?.length >= 3
-            ? donationCampaigns?.slice(indexOne, indexTwo + 1).map((campaign) => (
-                <Card key={campaign?._id}>
-                  <CardHeader shadow={false} floated={false} className="h-96">
-                    <img
-                      src={campaign?.petImage}
-                      className="h-full w-full object-cover"
-                    />
-                  </CardHeader>
-                  <CardBody>
-                    <div className="mb-2 flex flex-col">
-                      <Typography
-                        color="blue-gray"
-                        className="font-medium font-main"
-                      >
-                        Name:{" "}
-                        <span className="font-bold">{campaign?.petName}</span>
-                      </Typography>
-                      <Typography
-                        color="blue-gray"
-                        className="font-medium font-main"
-                      >
-                        Maximum Donation Amount:{" "}
-                        <span className="font-bold">
-                          {campaign?.maxDonationAmount}
-                        </span>
-                        $
-                      </Typography>
-                      <Typography
-                        color="blue-gray"
-                        className="font-medium font-main"
-                      >
-                        Total Donated:{" "}
-                        <span className="font-bold">
-                          {campaign?.donatedAmount}
-                        </span>
-                        $
-                      </Typography>
-                    </div>
-                  </CardBody>
-                  <CardFooter className="pt-0">
-                    <Link to={`/donationCampaign/${campaign?._id}`}>
-                      <Button
-                        ripple={false}
-                        fullWidth={true}
-                        className="bg-blue-gray-900/10 hover:bg-[#FF407D] hover:text-white text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-                      >
-                        View Details
-                      </Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
-              ))
+            ? donationCampaigns
+                ?.slice(indexOne, indexTwo + 1)
+                .map((campaign) => (
+                  <Card key={campaign?._id}>
+                    <CardHeader shadow={false} floated={false} className="h-96">
+                      <img
+                        src={campaign?.petImage}
+                        className="h-full w-full object-cover"
+                      />
+                    </CardHeader>
+                    <CardBody>
+                      <div className="mb-2 flex flex-col">
+                        <Typography
+                          color="blue-gray"
+                          className="font-medium font-main"
+                        >
+                          Name:{" "}
+                          <span className="font-bold">{campaign?.petName}</span>
+                        </Typography>
+                        <Typography
+                          color="blue-gray"
+                          className="font-medium font-main"
+                        >
+                          Maximum Donation Amount:{" "}
+                          <span className="font-bold">
+                            {campaign?.maxDonationAmount}
+                          </span>
+                          $
+                        </Typography>
+                        <Typography
+                          color="blue-gray"
+                          className="font-medium font-main"
+                        >
+                          Total Donated:{" "}
+                          <span className="font-bold">
+                            {campaign?.donatedAmount}
+                          </span>
+                          $
+                        </Typography>
+                      </div>
+                    </CardBody>
+                    <CardFooter className="pt-0">
+                      <Link to={`/donationCampaign/${campaign?._id}`}>
+                        <Button
+                          ripple={false}
+                          fullWidth={true}
+                          className="bg-blue-gray-900/10 hover:bg-[#FF407D] hover:text-white text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+                        >
+                          View Details
+                        </Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                ))
             : donationCampaigns?.map((campaign) => (
                 <Card key={campaign?._id}>
                   <CardHeader shadow={false} floated={false} className="h-96">

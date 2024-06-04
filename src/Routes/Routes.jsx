@@ -18,6 +18,7 @@ import MyDonationCampaigns from "../Pages/User/MyDonationCampaigns";
 import MyDonations from "../Pages/User/MyDonations";
 import UpdatePet from "../Pages/User/UpdatePet";
 import Profile from "../Pages/Profile";
+import EditDonation from "../Pages/User/EditDonation";
 
 export const router = createBrowserRouter([
   {
@@ -138,6 +139,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "editDonation/:id",
+        element: (
+          <PrivateRoute>
+            <EditDonation/>
           </PrivateRoute>
         ),
       },

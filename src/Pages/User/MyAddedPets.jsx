@@ -28,7 +28,7 @@ const MyAddedPets = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["myAddedPets"],
+    queryKey: ["myAddedPets", user?.email],
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosCommon.get(`/pets/${user.email}`);
