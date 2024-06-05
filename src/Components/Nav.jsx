@@ -155,10 +155,10 @@ const Nav = () => {
                   </MenuHandler>
                   <MenuList className="p-1 hidden lg:block">
                     <MenuItem onClick={() => navigate("/dashboard")}>
-                      <button className="text-[#000000]">Dashboard</button>
+                      <button className="text-[#000000] text-base font-main">Dashboard</button>
                     </MenuItem>
                     <MenuItem onClick={handleLogOut}>
-                      <button className="text-[#FF407D]">Log Out</button>
+                      <button className="text-[#FF407D] font-main">Log Out</button>
                     </MenuItem>
                   </MenuList>
                 </Menu>

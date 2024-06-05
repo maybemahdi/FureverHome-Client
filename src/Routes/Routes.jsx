@@ -19,6 +19,8 @@ import MyDonations from "../Pages/User/MyDonations";
 import UpdatePet from "../Pages/User/UpdatePet";
 import Profile from "../Pages/Profile";
 import EditDonation from "../Pages/User/EditDonation";
+import Users from "../Pages/Admin/Users";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -90,7 +92,7 @@ export const router = createBrowserRouter([
         path: "myAddedPets",
         element: (
           <PrivateRoute>
-            <MyAddedPets/>
+            <MyAddedPets />
           </PrivateRoute>
         ),
       },
@@ -98,7 +100,7 @@ export const router = createBrowserRouter([
         path: "adoptionRequests",
         element: (
           <PrivateRoute>
-            <AdopReq/>
+            <AdopReq />
           </PrivateRoute>
         ),
       },
@@ -106,7 +108,7 @@ export const router = createBrowserRouter([
         path: "createCampaign",
         element: (
           <PrivateRoute>
-            <CreateDonationCampaign/>
+            <CreateDonationCampaign />
           </PrivateRoute>
         ),
       },
@@ -114,7 +116,7 @@ export const router = createBrowserRouter([
         path: "myDonationCampaign",
         element: (
           <PrivateRoute>
-            <MyDonationCampaigns/>
+            <MyDonationCampaigns />
           </PrivateRoute>
         ),
       },
@@ -122,7 +124,7 @@ export const router = createBrowserRouter([
         path: "myDonations",
         element: (
           <PrivateRoute>
-            <MyDonations/>
+            <MyDonations />
           </PrivateRoute>
         ),
       },
@@ -130,7 +132,7 @@ export const router = createBrowserRouter([
         path: "updatePet/:id",
         element: (
           <PrivateRoute>
-            <UpdatePet/>
+            <UpdatePet />
           </PrivateRoute>
         ),
       },
@@ -138,7 +140,7 @@ export const router = createBrowserRouter([
         path: "profile",
         element: (
           <PrivateRoute>
-            <Profile/>
+            <Profile />
           </PrivateRoute>
         ),
       },
@@ -146,8 +148,18 @@ export const router = createBrowserRouter([
         path: "editDonation/:id",
         element: (
           <PrivateRoute>
-            <EditDonation/>
+            <EditDonation />
           </PrivateRoute>
+        ),
+      },
+
+      // admin routes
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <Users />
+          </AdminRoute>
         ),
       },
     ],

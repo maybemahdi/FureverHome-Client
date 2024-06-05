@@ -9,6 +9,7 @@ import logo from "../../assets/logo.png";
 import useRole from "../../Hooks/useRole";
 import UserMenu from "./Menu/UserMenu";
 import toast from "react-hot-toast";
+import AdminMenu from "./Menu/AdminMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -72,6 +73,7 @@ const Sidebar = () => {
 
             {/*  Menu Items */}
             {role === "User" && <UserMenu />}
+            {role === "Admin" && <AdminMenu /> }
           </div>
         </div>
 

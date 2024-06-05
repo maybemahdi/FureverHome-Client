@@ -211,7 +211,7 @@ const AdopReq = () => {
                               disabled
                               className="disabled:bg-gray-500 font-main"
                             >
-                              {status === "rejected" ? "Accept": "Accepted"}
+                              {status === "rejected" ? "Accept" : "Accepted"}
                             </Button>
                           ) : (
                             <Button

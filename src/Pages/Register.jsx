@@ -4,11 +4,14 @@ import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { FaGithub } from "react-icons/fa";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const Register = () => {
   const {
     createUser,
     googleLogin,
+    update,
+    setUpdate,
     loading,
     githubLogin,
     updateUserProfile,
@@ -38,6 +41,7 @@ const Register = () => {
       // console.log(data.data.display_url);
       const result = await createUser(email, password);
       await updateUserProfile(name, data.data.display_url);
+      setUpdate(!update);
       console.log(result);
       form.reset();
       navigate(location.state ? location.state : "/");
@@ -69,6 +73,7 @@ const Register = () => {
       toast.error(err.message);
     }
   };
+  if (loading) return <LoadingSpinner />;
   return (
     <div className="flex justify-center items-center min-h-screen my-10">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-200 text-gray-900">
