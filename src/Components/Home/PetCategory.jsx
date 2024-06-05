@@ -20,10 +20,10 @@ const PetCategory = () => {
       categoryName: "rabbit",
       image: "https://i.ibb.co/S05wGyj/photo-1559214369-a6b1d7919865.jpg",
     },
-    {
-      categoryName: "fish",
-      image: "https://i.ibb.co/YjC2Bnw/photo-1599488615731-7e5c2823ff28.jpg",
-    },
+    // {
+    //   categoryName: "fish",
+    //   image: "https://i.ibb.co/YjC2Bnw/photo-1599488615731-7e5c2823ff28.jpg",
+    // },
   ];
 
   return (
@@ -34,7 +34,7 @@ const PetCategory = () => {
         categories. From cats and dogs to rabbits , we have a variety of
         loving animals ready for adoption `}
       />
-      <div className="my-10 grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="my-10 grid gap-6 grid-cols-1 md:grid-cols-3">
         {categories.map((category) => (
           <Link
             to={`/pet/category/${category?.categoryName}`}

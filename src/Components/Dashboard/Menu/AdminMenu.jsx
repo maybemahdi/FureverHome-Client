@@ -1,6 +1,7 @@
 import { FaCat, FaUsers } from "react-icons/fa";
 import { FaBuildingUser } from "react-icons/fa6";
 import { FiGitPullRequest } from "react-icons/fi";
+import { IoLogoOctocat } from "react-icons/io";
 import {
   MdCampaign,
   MdCreateNewFolder,
@@ -98,6 +99,18 @@ const AdminMenu = () => {
         <FaUsers className="w-5 h-5" />
 
         <span className="mx-4 font-medium">Users</span>
+      </NavLink>
+      <NavLink
+        to="allPets"
+        className={({ isActive }) =>
+          `flex items-center px-4 my-5  transition-colors duration-300 transform   ${
+            isActive ? "text-[#FF407D]" : "text-black"
+          }`
+        }
+      >
+        <IoLogoOctocat className="w-5 h-5" />
+
+        <span className="mx-4 font-medium">All Pets</span>
       </NavLink>
     </nav>
   );

@@ -21,6 +21,7 @@ import Profile from "../Pages/Profile";
 import EditDonation from "../Pages/User/EditDonation";
 import Users from "../Pages/Admin/Users";
 import AdminRoute from "./AdminRoute";
+import AllPets from "../Pages/Admin/AllPets";
 
 export const router = createBrowserRouter([
   {
@@ -159,6 +160,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <Users />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allPets",
+        element: (
+          <AdminRoute>
+            <AllPets />
           </AdminRoute>
         ),
       },

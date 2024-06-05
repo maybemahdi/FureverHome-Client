@@ -66,7 +66,7 @@ const UpdatePet = () => {
       longDescription: data.longDescription || selectedPet?.longDescription,
       petCategory: selectedOption?.value,
       petImage: preview || selectedPet?.petImage,
-      adopted: false,
+      adopted: selectedPet.adopted || false,
       provider: user?.email,
       timestamp: selectedPet?.timestamp || Date.now(),
     };
