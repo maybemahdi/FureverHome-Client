@@ -49,57 +49,65 @@ const MyDonations = () => {
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />
-      <SectionStart heading={`My Donations`} />
+      {myDonations?.length > 0 ? (
+        <SectionStart heading={`My Donations`} />
+      ) : (
+        <SectionStart heading={`No Donation Yet!`} />
+      )}
       <div className="my-10">
-        <Card className="h-full md:w-[80%] mx-auto overflow-scroll xl:overflow-hidden">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th
-                    key={head}
-                    className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-bold text-base font-main leading-none opacity-70"
+        {myDonations?.length > 0 && (
+          <Card className="h-full md:w-[80%] mx-auto overflow-scroll xl:overflow-hidden">
+            <table className="w-full min-w-max table-auto text-left">
+              <thead>
+                <tr>
+                  {TABLE_HEAD.map((head) => (
+                    <th
+                      key={head}
+                      className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                     >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {myDonations?.map(({ petImage, petName, donatedAmount, _id }) => {
-                const classes = "p-4 border-b border-blue-gray-50";
-
-                return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <img
-                        className="w-11 h-11 rounded"
-                        src={petImage}
-                        alt=""
-                      />
-                    </td>
-                    <td className={classes}>{petName}</td>
-                    <td className={classes}>{donatedAmount}</td>
-                    <td className={classes}>
-                      <button
-                        onClick={() => handleRefund(_id)}
-                        className="bg-[#FF407D] text-white p-2 rounded"
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-bold text-base font-main leading-none opacity-70"
                       >
-                        Ask for Refund
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </Card>
+                        {head}
+                      </Typography>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {myDonations?.map(
+                  ({ petImage, petName, donatedAmount, _id }) => {
+                    const classes = "p-4 border-b border-blue-gray-50";
+
+                    return (
+                      <tr key={name}>
+                        <td className={classes}>
+                          <img
+                            className="w-11 h-11 rounded"
+                            src={petImage}
+                            alt=""
+                          />
+                        </td>
+                        <td className={classes}>{petName}</td>
+                        <td className={classes}>{donatedAmount}</td>
+                        <td className={classes}>
+                          <button
+                            onClick={() => handleRefund(_id)}
+                            className="bg-[#FF407D] text-white p-2 rounded"
+                          >
+                            Ask for Refund
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
+                )}
+              </tbody>
+            </table>
+          </Card>
+        )}
       </div>
     </div>
   );

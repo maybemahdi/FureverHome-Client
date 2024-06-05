@@ -106,111 +106,117 @@ const MyDonationCampaigns = () => {
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />
-      <SectionStart heading={`My Donation Campaigns`} />
+      {myCamp?.length > 0 ? (
+        <SectionStart heading={`My Donation Campaigns`} />
+      ) : (
+        <SectionStart heading={`No Campaigns Found!`} />
+      )}
       <div className="my-10">
-        <Card className="h-full md:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th
-                    key={head}
-                    className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-main text-base text-black font-bold leading-none opacity-70"
+        {myCamp?.length > 0 && (
+          <Card className="h-full md:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
+            <table className="w-full min-w-max table-auto text-left">
+              <thead>
+                <tr>
+                  {TABLE_HEAD.map((head) => (
+                    <th
+                      key={head}
+                      className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                     >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {myCamp?.map(
-                ({
-                  petName,
-                  maxDonationAmount,
-                  donatedAmount,
-                  _id,
-                  status,
-                }) => {
-                  const classes = "p-4 border-b border-blue-gray-50";
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-main text-base text-black font-bold leading-none opacity-70"
+                      >
+                        {head}
+                      </Typography>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {myCamp?.map(
+                  ({
+                    petName,
+                    maxDonationAmount,
+                    donatedAmount,
+                    _id,
+                    status,
+                  }) => {
+                    const classes = "p-4 border-b border-blue-gray-50";
 
-                  return (
-                    <tr key={petName}>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal font-main"
-                        >
-                          {petName}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal font-main"
-                        >
-                          {maxDonationAmount}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal font-main"
-                        >
-                          <Progress
-                            value={(donatedAmount / maxDonationAmount) * 100}
-                            color="green"
-                          />
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        {status !== "paused" ? (
-                          <FaCirclePause
-                            title="Pause"
-                            onClick={() => handlePause(_id)}
-                            size={20}
-                            className="cursor-pointer"
-                          />
-                        ) : (
-                          <RxResume
-                            onClick={() => handleResume(_id)}
-                            title="Resume"
-                            size={20}
-                            className="cursor-pointer"
-                          />
-                        )}
-                      </td>
-                      <td className={classes}>
-                        <Link to={`/dashboard/editDonation/${_id}`}>
-                          <FiEdit3 size={20} className="cursor-pointer" />
-                        </Link>
-                      </td>
-                      <td className={classes}>
-                        <button
-                          onClick={() => {
-                            setId(_id);
-                            setIsOpen(true);
-                          }}
-                          className="bg-[#FF407D] text-white p-2 rounded"
-                        >
-                          View Donators
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                }
-              )}
-            </tbody>
-          </table>
-        </Card>
+                    return (
+                      <tr key={petName}>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal font-main"
+                          >
+                            {petName}
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal font-main"
+                          >
+                            {maxDonationAmount}
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal font-main"
+                          >
+                            <Progress
+                              value={(donatedAmount / maxDonationAmount) * 100}
+                              color="green"
+                            />
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          {status !== "paused" ? (
+                            <FaCirclePause
+                              title="Pause"
+                              onClick={() => handlePause(_id)}
+                              size={20}
+                              className="cursor-pointer"
+                            />
+                          ) : (
+                            <RxResume
+                              onClick={() => handleResume(_id)}
+                              title="Resume"
+                              size={20}
+                              className="cursor-pointer"
+                            />
+                          )}
+                        </td>
+                        <td className={classes}>
+                          <Link to={`/dashboard/editDonation/${_id}`}>
+                            <FiEdit3 size={20} className="cursor-pointer" />
+                          </Link>
+                        </td>
+                        <td className={classes}>
+                          <button
+                            onClick={() => {
+                              setId(_id);
+                              setIsOpen(true);
+                            }}
+                            className="bg-[#FF407D] text-white p-2 rounded"
+                          >
+                            View Donators
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
+                )}
+              </tbody>
+            </table>
+          </Card>
+        )}
         {/* modal   */}
         <DonatorsModal
           id={id}

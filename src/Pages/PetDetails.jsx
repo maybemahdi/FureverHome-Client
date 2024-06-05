@@ -73,7 +73,7 @@ const PetDetails = () => {
             onClick={() => {
               setIsOpen(true);
             }}
-            className="bg-[#FF407D]"
+            className="bg-[#FF407D] font-main"
           >
             Adopt {selectedPet?.petName}
           </Button>

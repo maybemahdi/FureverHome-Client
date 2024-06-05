@@ -13,8 +13,8 @@ const Profile = () => {
       <div className="bg-white shadow-lg rounded-2xl w-full md:w-3/5">
         <img
           alt="profile"
-          src="https://wallpapercave.com/wp/wp10784415.jpg"
-          className="w-full mb-4 rounded-t-lg h-36"
+          src="https://wallpapercave.com/wp/wp9109600.jpg"
+          className="w-full mb-4 rounded-t-lg h-36 object-cover"
         />
         <div className="flex flex-col items-center justify-center p-4 -mt-16">
           <a href="#" className="relative block">

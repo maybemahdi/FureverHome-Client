@@ -51,7 +51,7 @@ const AdoptForm = ({ pet, setIsOpen }) => {
   return (
     <form onSubmit={handleAdopt}>
       <div className="mb-1 flex flex-col mt-4 gap-4">
-        <Typography variant="h6" color="blue-gray" className="-mb-4">
+        <Typography variant="h6" color="blue-gray" className="-mb-4 font-main">
           User Name
         </Typography>
         <Input
@@ -61,12 +61,12 @@ const AdoptForm = ({ pet, setIsOpen }) => {
           type="text"
           name="name"
           placeholder="Your Name"
-          className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+          className=" !border-t-blue-gray-200 font-main focus:!border-t-gray-900"
           labelProps={{
             className: "before:content-none after:content-none",
           }}
         />
-        <Typography variant="h6" color="blue-gray" className="-mb-4">
+        <Typography variant="h6" color="blue-gray" className="-mb-4 font-main">
           Your Email
         </Typography>
         <Input
@@ -76,12 +76,12 @@ const AdoptForm = ({ pet, setIsOpen }) => {
           type="email"
           disabled
           placeholder="name@mail.com"
-          className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+          className=" !border-t-blue-gray-200 font-main focus:!border-t-gray-900"
           labelProps={{
             className: "before:content-none after:content-none",
           }}
         />
-        <Typography variant="h6" color="blue-gray" className="-mb-4">
+        <Typography variant="h6" color="blue-gray" className="-mb-4 font-main">
           Your Phone
         </Typography>
         <Input
@@ -90,12 +90,12 @@ const AdoptForm = ({ pet, setIsOpen }) => {
           placeholder="Your Phone Number"
           name="phone"
           required
-          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+          className="!border-t-blue-gray-200 font-main focus:!border-t-gray-900"
           labelProps={{
             className: "before:content-none after:content-none",
           }}
         />
-        <Typography variant="h6" color="blue-gray" className="-mb-4">
+        <Typography variant="h6" color="blue-gray" className="-mb-4 font-main">
           Your Address
         </Typography>
         <Input
@@ -104,7 +104,7 @@ const AdoptForm = ({ pet, setIsOpen }) => {
           required
           placeholder="Your Address"
           name="address"
-          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+          className="!border-t-blue-gray-200 font-main focus:!border-t-gray-900"
           labelProps={{
             className: "before:content-none after:content-none",
           }}
@@ -114,7 +114,7 @@ const AdoptForm = ({ pet, setIsOpen }) => {
           //     setIsOpen(false);
           //   }}
           type="submit"
-          className="bg-[#FF407D]"
+          className="bg-[#FF407D] font-main"
         >
           {`Adopt => ${pet?.petName}`}
         </Button>
