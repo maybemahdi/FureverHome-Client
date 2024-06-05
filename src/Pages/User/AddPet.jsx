@@ -42,7 +42,7 @@ const AddPet = () => {
         icon: "success",
       });
       reset();
-      setPreview(null)
+      setPreview(null);
     },
     onError: (err) => {
       toast.error(err.message);
@@ -57,6 +57,9 @@ const AddPet = () => {
       provider: user?.email,
       timestamp: Date.now(),
     };
+    if(!preview) {
+      return toast.error("Please Provide your Pet Image")
+    }
     await mutateAsync(petData);
   };
   const handleImage = async (e) => {
@@ -81,7 +84,7 @@ const AddPet = () => {
   };
   return (
     <div className="my-10 flex flex-col justify-center">
-      <ScrollRestoration/>
+      <ScrollRestoration />
       <SectionStart heading={`Add Your Pet`} />
       <div className="p-4 w-full md:w-3/4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>

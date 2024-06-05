@@ -22,6 +22,8 @@ import EditDonation from "../Pages/User/EditDonation";
 import Users from "../Pages/Admin/Users";
 import AdminRoute from "./AdminRoute";
 import AllPets from "../Pages/Admin/AllPets";
+import AllDonations from "../Pages/Admin/AllDonations";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +85,14 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: (
+          <PrivateRoute>
+            <DashboardHome />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addPet",
         element: (
           <PrivateRoute>
             <AddPet />
@@ -168,6 +178,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllPets />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allDonations",
+        element: (
+          <AdminRoute>
+            <AllDonations />
           </AdminRoute>
         ),
       },

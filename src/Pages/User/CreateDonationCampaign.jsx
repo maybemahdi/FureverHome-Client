@@ -52,6 +52,9 @@ const CreateDonationCampaign = () => {
       creator: user?.email,
       timestamp: Date.now(),
     };
+    if(!preview) {
+      return toast.error("Please Provide your Pet Image")
+    }
     await mutateAsync(petData);
   };
   const handleImage = async (e) => {
@@ -102,7 +105,7 @@ const CreateDonationCampaign = () => {
                 {...register("maxDonationAmount", { required: true })}
                 type="number"
               />
-              {errors.petAge && (
+              {errors.maxDonationAmount && (
                 <p className="text-base text-[#FF407D] block">
                   Max Donation Amount is required!
                 </p>
@@ -120,6 +123,7 @@ const CreateDonationCampaign = () => {
                       className="text-sm cursor-pointer hidden"
                       type="file"
                       name="image"
+                      // required
                       onChange={handleImage}
                       id="image"
                       accept="image/*"
@@ -144,11 +148,6 @@ const CreateDonationCampaign = () => {
                   )}
                 </label>
               </div>
-              {errors.image && (
-                <p className="text-base text-[#FF407D] block">
-                  Image is required
-                </p>
-              )}
             </div>
             <div className="basis-1/2 w-full">
               <Input
@@ -158,7 +157,7 @@ const CreateDonationCampaign = () => {
                 {...register("lastDateOfDonation", { required: true })}
                 type="date"
               />
-              {errors.petAge && (
+              {errors.lastDateOfDonation && (
                 <p className="text-base text-[#FF407D] block">
                   Last Date of Donation is required!
                 </p>

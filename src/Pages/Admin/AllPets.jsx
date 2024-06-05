@@ -10,7 +10,7 @@ import { FiEdit3 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
-const TABLE_HEAD = ["Pet Name", "Pet Image", "Edit", "Delete", "Action", "Action"];
+const TABLE_HEAD = ["Pet Name", "Pet Image", "Update", "Delete", "Action", "Action"];
 
 const AllPets = () => {
   const axiosCommon = useAxiosCommon();
@@ -126,7 +126,7 @@ const AllPets = () => {
   return (
     <div className="my-10">
       <ScrollRestoration />
-      <SectionStart heading={`Manage all Available Pets Here!`} />
+      <SectionStart heading={`Manage all Available Pets Here`} />
       <div className="my-10">
         <Card className="h-full lg:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
           <table className="w-full min-w-max table-auto text-left">

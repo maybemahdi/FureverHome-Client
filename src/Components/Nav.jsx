@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+
 import {
   Navbar,
   MobileNav,
@@ -19,10 +21,29 @@ import toast from "react-hot-toast";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const closeMenu = () => setIsMenuOpen(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
   const [openNav, setOpenNav] = React.useState(false);
+  const [isDarkMode, setDarkMode] = React.useState(localStorage.getItem("checked") || false);
+
+  useEffect(() => {
+    // Update localStorage and body class when theme changes
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("checked", isDarkMode);
+    if (theme === "dark") {
+      document.body.classList.add("bg-gray-900");
+      document.body.classList.remove("bg-white");
+    } else {
+      document.body.classList.add("bg-white");
+      document.body.classList.remove("bg-gray-900");
+    }
+  }, [theme, isDarkMode]);
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+    setTheme(isDarkMode ? "light" : "dark");
+  };
+
   React.useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 960) {
@@ -128,7 +149,23 @@ const Nav = () => {
                 </NavLink>
               </>
             )}
-            <div>
+            <div className="flex items-center gap-6">
+              {/* <Switch
+                checked={enabled}
+                onChange={setEnabled}
+                className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-[#ffffff9d] p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-[#111111c3]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-[#FF407D] ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
+                />
+              </Switch> */}
+              {/* installed: "react-toggle-dark-mode": "^1.1.1",  */}
+              <DarkModeSwitch
+                checked={isDarkMode}
+                onChange={toggleDarkMode}
+                size={40}
+              />
               {user && (
                 <Menu
                   open={isMenuOpen}
@@ -155,10 +192,14 @@ const Nav = () => {
                   </MenuHandler>
                   <MenuList className="p-1 hidden lg:block">
                     <MenuItem onClick={() => navigate("/dashboard")}>
-                      <button className="text-[#000000] text-base font-main">Dashboard</button>
+                      <button className="text-[#000000] text-base font-main">
+                        Dashboard
+                      </button>
                     </MenuItem>
                     <MenuItem onClick={handleLogOut}>
-                      <button className="text-[#FF407D] font-main">Log Out</button>
+                      <button className="text-[#FF407D] font-main">
+                        Log Out
+                      </button>
                     </MenuItem>
                   </MenuList>
                 </Menu>
