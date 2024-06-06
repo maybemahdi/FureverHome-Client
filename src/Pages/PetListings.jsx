@@ -11,15 +11,71 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { Link, ScrollRestoration, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
+import { useEffect, useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
 const PetListings = () => {
   const axiosCommon = useAxiosCommon();
   const { category } = useParams();
+  const { setFooterVisible } = useFooterVisibility();
+  const [scrollLoading, setScrollLoading] = useState(true);
+  const [allDataLoaded, setAllDataLoaded] = useState(false);
+  const [perPage, setPerPage] = useState(3);
+
+  useEffect(() => {
+    if (!allDataLoaded) {
+      setFooterVisible(false);
+      return () => setFooterVisible(true);
+    }
+  }, [setFooterVisible, allDataLoaded]);
+
+  function debounce(fn, delay) {
+    let timeoutId;
+    return (...args) => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  }
+
+  const handleScroll = debounce(() => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      if (!allDataLoaded) {
+        setScrollLoading(true);
+        setPerPage((prev) => {
+          if (window.innerWidth >= 768) {
+            return prev + 3;
+          } else {
+            return prev + 1;
+          }
+        });
+      }
+    }
+  }, 500); // 500ms delay for debounce
+  // console.log(perPage);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [allDataLoaded]);
+
   const { data: pets = [], isLoading } = useQuery({
-    queryKey: ["allPets", category],
+    queryKey: ["allPets", category, perPage],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/pets?category=${category}`);
+      const { data } = await axiosCommon.get(
+        `/pets?category=${category}&per_page=${perPage}`
+      );
+      setScrollLoading(false);
+      // Check if the returned data length is less than perPage
+      if (data.length < perPage) {
+        setAllDataLoaded(true); // no more data to load
+      }
       return data;
     },
   });
@@ -27,7 +83,7 @@ const PetListings = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-10">
-      <ScrollRestoration />
+      {/* <ScrollRestoration /> */}
       <SectionStart
         heading={`Explore Our Wonderful Pets`}
         subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}
@@ -88,6 +144,11 @@ const PetListings = () => {
           </h2>
         </div>
       )}
+      <div className="flex justify-center my-10">
+        {!allDataLoaded && (
+          <ImSpinner9 size={30} color="#FF407D" className="animate-spin" />
+        )}
+      </div>
     </div>
   );
 };

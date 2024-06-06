@@ -25,7 +25,9 @@ const Nav = () => {
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
   const [openNav, setOpenNav] = React.useState(false);
-  const [isDarkMode, setDarkMode] = React.useState(localStorage.getItem("checked") || false);
+  const [isDarkMode, setDarkMode] = React.useState(
+    localStorage.getItem("checked") || false
+  );
 
   useEffect(() => {
     // Update localStorage and body class when theme changes
@@ -41,6 +43,7 @@ const Nav = () => {
   }, [theme, isDarkMode]);
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
+    // console.log(checked)
     setTheme(isDarkMode ? "light" : "dark");
   };
 
@@ -150,16 +153,6 @@ const Nav = () => {
               </>
             )}
             <div className="flex items-center gap-6">
-              {/* <Switch
-                checked={enabled}
-                onChange={setEnabled}
-                className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-[#ffffff9d] p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-[#111111c3]"
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-[#FF407D] ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
-                />
-              </Switch> */}
               {/* installed: "react-toggle-dark-mode": "^1.1.1",  */}
               <DarkModeSwitch
                 checked={isDarkMode}

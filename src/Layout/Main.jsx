@@ -3,8 +3,10 @@ import Nav from "../Components/Nav";
 import Footer from "../Components/Footer";
 import Headroom from "react-headroom";
 import ScrollToTop from "react-scroll-to-top";
+import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
 
 const Main = () => {
+  const { isFooterVisible } = useFooterVisibility();
   return (
     <div>
       <Headroom>
@@ -27,7 +29,7 @@ const Main = () => {
         }}
         color="#ffff"
       />
-      <Footer />
+      {isFooterVisible && <Footer />}
     </div>
   );
 };

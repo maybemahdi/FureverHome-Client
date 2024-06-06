@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
 import SectionStart from "../Components/Shared/SectionStart";
-import useAxiosCommon from "../Hooks/useAxiosCommon";
 import LoadingSpinner from "../Components/LoadingSpinner";
 
 import {
@@ -11,15 +9,27 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { Link, ScrollRestoration } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useCampaigns from "../Hooks/useCampaigns";
+import { ImSpinner9 } from "react-icons/im";
+import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
+import { useEffect } from "react";
 
 const DonationCampaigns = () => {
-  const { donationCampaigns, isLoading } = useCampaigns();
+  const { donationCampaigns, isLoading, allDataLoaded } =
+    useCampaigns();
+  const { setFooterVisible } = useFooterVisibility();
+
+  useEffect(() => {
+    if(!allDataLoaded){
+      setFooterVisible(false);
+    return () => setFooterVisible(true);
+    }
+  }, [setFooterVisible, allDataLoaded]);
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="my-10">
-      <ScrollRestoration />
+      {/* <ScrollRestoration /> */}
       <SectionStart
         heading={`All Campaigns Available Here!`}
         subHeading={`Join Campaigns to help and save Animals!`}
@@ -64,6 +74,11 @@ const DonationCampaigns = () => {
             </CardFooter>
           </Card>
         ))}
+      </div>
+      <div className="flex justify-center my-10">
+        {!allDataLoaded && (
+          <ImSpinner9 size={30} color="#FF407D" className="animate-spin" />
+        )}
       </div>
     </div>
   );
