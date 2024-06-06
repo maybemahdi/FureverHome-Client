@@ -2,15 +2,13 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../Components/Dashboard/Sidebar";
 import Nav from "../Components/Nav";
 import useRole from "../Hooks/useRole";
-import LoadingSpinner from "../Components/LoadingSpinner";
 import ScrollToTop from "react-scroll-to-top";
 import Headroom from "react-headroom";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <>
       <div className="hidden lg:block">

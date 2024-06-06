@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, ScrollRestoration, useParams } from "react-router-dom";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
-import LoadingSpinner from "../Components/LoadingSpinner";
 import SectionStart from "../Components/Shared/SectionStart";
 
 import {
@@ -15,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import PaymentModal from "../Components/DonationCampaigns/PaymentModal";
 import useCampaigns from "../Hooks/useCampaigns";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const DonationDetails = () => {
   const { id } = useParams();
@@ -47,7 +47,7 @@ const DonationDetails = () => {
     }
   }, [donationCampaigns, id]);
 
-  if (isLoading || campLoading) return <LoadingSpinner />;
+  if (isLoading || campLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
       <ScrollRestoration />

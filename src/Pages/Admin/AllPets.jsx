@@ -2,13 +2,13 @@ import { Link, ScrollRestoration } from "react-router-dom";
 import SectionStart from "../../Components/Shared/SectionStart";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../Components/LoadingSpinner";
 
 import { Card, Typography } from "@material-tailwind/react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FiEdit3 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 
 const TABLE_HEAD = ["Pet Name", "Pet Image", "Update", "Delete", "Action", "Action"];
 
@@ -122,7 +122,7 @@ const AllPets = () => {
       }
     });
   };
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
       <ScrollRestoration />

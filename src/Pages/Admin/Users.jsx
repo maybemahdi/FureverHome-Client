@@ -2,10 +2,10 @@ import { ScrollRestoration } from "react-router-dom";
 import SectionStart from "../../Components/Shared/SectionStart";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
-import LoadingSpinner from "../../Components/LoadingSpinner";
 import { Card, Typography } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 
 const TABLE_HEAD = ["Name", "Email", "Profile Photo", "Action"];
 
@@ -49,7 +49,7 @@ const Users = () => {
       }
     });
   };
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />

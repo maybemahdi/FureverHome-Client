@@ -5,7 +5,6 @@ import { Card, Progress, Typography } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
-import LoadingSpinner from "../../Components/LoadingSpinner";
 import { FaCirclePause } from "react-icons/fa6";
 import { RxResume } from "react-icons/rx";
 import { FiEdit3 } from "react-icons/fi";
@@ -13,6 +12,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import DonatorsModal from "../../Components/Dashboard/DonatorsModal";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 
 const TABLE_HEAD = [
   "Pet Name",
@@ -102,7 +102,7 @@ const MyDonationCampaigns = () => {
       }
     });
   };
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />

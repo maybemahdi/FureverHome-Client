@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionStart from "../Components/Shared/SectionStart";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
-import LoadingSpinner from "../Components/LoadingSpinner";
 
 import {
   Card,
@@ -15,6 +14,8 @@ import { Link, useParams } from "react-router-dom";
 import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import "react-loading-skeleton/dist/skeleton.css";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const PetListings = () => {
   const axiosCommon = useAxiosCommon();
@@ -80,14 +81,17 @@ const PetListings = () => {
     },
   });
 
-  if (isLoading) return <LoadingSpinner />;
+  // if (isLoading) return <LoadingSpinner />;
+  // if (isLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <div className="my-10">
       {/* <ScrollRestoration /> */}
-      <SectionStart
-        heading={`Explore Our Wonderful Pets`}
-        subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}
-      />
+      {!isLoading && (
+        <SectionStart
+          heading={`Explore Our Wonderful Pets`}
+          subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}
+        />
+      )}
       {pets?.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
           {pets?.map((pet) => (
@@ -134,6 +138,13 @@ const PetListings = () => {
                 </Link>
               </CardFooter>
             </Card>
+          ))}
+        </div>
+      )}
+      {isLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <LoadingSkeleton key={idx} type="card" />
           ))}
         </div>
       )}

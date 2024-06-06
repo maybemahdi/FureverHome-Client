@@ -1,5 +1,4 @@
 import SectionStart from "../Components/Shared/SectionStart";
-import LoadingSpinner from "../Components/LoadingSpinner";
 
 import {
   Card,
@@ -14,19 +13,19 @@ import useCampaigns from "../Hooks/useCampaigns";
 import { ImSpinner9 } from "react-icons/im";
 import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
 import { useEffect } from "react";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const DonationCampaigns = () => {
-  const { donationCampaigns, isLoading, allDataLoaded } =
-    useCampaigns();
+  const { donationCampaigns, isLoading, allDataLoaded } = useCampaigns();
   const { setFooterVisible } = useFooterVisibility();
 
   useEffect(() => {
-    if(!allDataLoaded){
+    if (!allDataLoaded) {
       setFooterVisible(false);
-    return () => setFooterVisible(true);
+      return () => setFooterVisible(true);
     }
   }, [setFooterVisible, allDataLoaded]);
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
       {/* <ScrollRestoration /> */}

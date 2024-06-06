@@ -12,7 +12,7 @@ const Features = () => {
         <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
           <div
             data-aos="flip-down"
-            className="p-8 space-y-3 border-2 border-[#FF407D] shadow bg-white rounded-xl"
+            className="p-8 space-y-3 border-2 border-[#FF407D] shadow rounded-xl"
           >
             <span className="inline-block text-[#FF407D]">
               <svg
@@ -46,7 +46,7 @@ const Features = () => {
           </div>
           <div
             data-aos="flip-down"
-            className="p-8 space-y-3 border-2 border-[#FF407D] bg-white shadow rounded-xl"
+            className="p-8 space-y-3 border-2 border-[#FF407D] shadow rounded-xl"
           >
             <span className="inline-block text-[#FF407D]">
               <svg
@@ -81,7 +81,7 @@ const Features = () => {
           </div>
           <div
             data-aos="flip-down"
-            className="p-8 space-y-3 border-2 border-[#FF407D] bg-white shadow rounded-xl"
+            className="p-8 space-y-3 border-2 border-[#FF407D] shadow rounded-xl"
           >
             <span className="inline-block text-[#FF407D]">
               <svg

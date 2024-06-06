@@ -10,7 +10,7 @@ import { Button } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 const DonatorsModal = ({ isOpen, close, setIsOpen, id }) => {
   const axiosCommon = useAxiosCommon();
@@ -21,7 +21,7 @@ const DonatorsModal = ({ isOpen, close, setIsOpen, id }) => {
       return data;
     },
   });
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <>
       <Transition appear show={isOpen}>

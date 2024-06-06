@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { ScrollRestoration, useParams } from "react-router-dom";
-import LoadingSpinner from "../../Components/LoadingSpinner";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 const EditDonation = () => {
   const { id } = useParams();
   const {
@@ -90,7 +90,7 @@ const EditDonation = () => {
       setImgLoading(false);
     }
   };
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />

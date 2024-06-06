@@ -9,10 +9,10 @@ import {
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
-import LoadingSpinner from "../Components/LoadingSpinner";
 import SectionStart from "../Components/Shared/SectionStart";
 import { useState } from "react";
 import DetailsModal from "../Components/Pet/DetailsModal";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 const PetDetails = () => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosCommon = useAxiosCommon();
@@ -29,7 +29,7 @@ const PetDetails = () => {
     setIsOpen(false);
   }
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
       <ScrollRestoration />

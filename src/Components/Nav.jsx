@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-
 import {
   Navbar,
   MobileNav,
@@ -21,13 +20,15 @@ import toast from "react-hot-toast";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const initialTheme = localStorage.getItem("theme") || "light";
+  const initialDarkMode = localStorage.getItem("checked") === "true";
+
+  const [theme, setTheme] = useState(initialTheme);
+  const [isDarkMode, setDarkMode] = useState(initialDarkMode);
+
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
   const [openNav, setOpenNav] = React.useState(false);
-  const [isDarkMode, setDarkMode] = React.useState(
-    localStorage.getItem("checked") || false
-  );
 
   useEffect(() => {
     // Update localStorage and body class when theme changes
@@ -36,18 +37,22 @@ const Nav = () => {
     if (theme === "dark") {
       document.body.classList.add("bg-gray-900");
       document.body.classList.remove("bg-white");
+      document.body.classList.add("text-white");
+      document.body.classList.remove("text-black");
     } else {
       document.body.classList.add("bg-white");
       document.body.classList.remove("bg-gray-900");
+      document.body.classList.add("text-black");
+      document.body.classList.remove("text-white");
     }
   }, [theme, isDarkMode]);
+
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
-    // console.log(checked)
-    setTheme(isDarkMode ? "light" : "dark");
+    setTheme(checked ? "dark" : "light");
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 960) {
         setOpenNav(false);
@@ -59,6 +64,7 @@ const Nav = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   const navList = (
     <ul className="mt-2 mb-4 font-semibold flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li>
@@ -105,14 +111,16 @@ const Nav = () => {
       </li>
     </ul>
   );
+
   const handleLogOut = () => {
     console.log("Logged Out");
     logOut().then(() => {
       toast.success("Log Out Successful");
     });
   };
+
   return (
-    <Navbar className=" bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
+    <Navbar className="bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
       <div className="flex items-center justify-between z-20 relative">
         <Link to={"/"}>
           <img
@@ -177,7 +185,7 @@ const Nav = () => {
                         alt="tania andrew"
                         withBorder={true}
                         color="blue-gray"
-                        className=" p-0.5"
+                        className="p-0.5"
                         referrerPolicy="no-referrer"
                         src={user?.photoURL}
                       />

@@ -4,7 +4,7 @@ import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { FaGithub } from "react-icons/fa";
-import LoadingSpinner from "../Components/LoadingSpinner";
+import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const Register = () => {
   const {
@@ -73,7 +73,7 @@ const Register = () => {
       toast.error(err.message);
     }
   };
-  if (loading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="flex justify-center items-center min-h-screen my-10">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-200 text-gray-900">

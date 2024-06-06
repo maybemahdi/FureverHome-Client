@@ -12,12 +12,12 @@ import {
 import useAuth from "../../Hooks/useAuth";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useMemo, useState } from "react";
-import LoadingSpinner from "../../Components/LoadingSpinner";
 import { Link, ScrollRestoration } from "react-router-dom";
 import { FiEdit3 } from "react-icons/fi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 
 const MyAddedPets = () => {
   const { user } = useAuth();
@@ -200,7 +200,7 @@ const MyAddedPets = () => {
     },
   });
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />

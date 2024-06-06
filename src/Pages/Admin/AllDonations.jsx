@@ -3,7 +3,6 @@ import SectionStart from "../../Components/Shared/SectionStart";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../Components/LoadingSpinner";
 import { FiEdit3 } from "react-icons/fi";
 import { RxResume } from "react-icons/rx";
 import { FaCirclePause } from "react-icons/fa6";
@@ -11,6 +10,7 @@ import { Card, Progress, Typography } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
+import LoadingSkeleton from "../../Components/LoadingSkeleton";
 
 const TABLE_HEAD = [
     "Pet Name",
@@ -131,7 +131,7 @@ const AllDonations = () => {
         }
       });
   }
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
       <ScrollRestoration />
