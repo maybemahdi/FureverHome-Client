@@ -11,9 +11,10 @@
 * Password : 123456
 
 ## Features and Characteristics:
+* Payment Integration
 * User authentication system
 * NoSQL Database Management system
-* A Simplified Experienced Pet Adoption
+* A Simplified Experienced Pet Adoption Platform
 * Different Dashboard for User And Admin
 * Manage Your Adoption
 * Responsive design for seamless user experience across devices
