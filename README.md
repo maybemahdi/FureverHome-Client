@@ -1,8 +1,36 @@
-# React + Vite
+# FureverHome
+## Welcome to the FureverHome! This is a README file showcasing the features and used things of this Pet Adoption Platform.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Category : assignment12_category_0009
 
-Currently, two official plugins are available:
+### Live Site URL: 
+* Live : https://fureverhome-970e1.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Admin Email/Pass
+* Email : mh7266391@gmail.com
+* Password : 123456
+
+## Features and Characteristics:
+* User authentication system
+* NoSQL Database Management system
+* A Simplified Experienced Pet Adoption
+* Different Dashboard for User And Admin
+* Manage Your Adoption
+* Responsive design for seamless user experience across devices
+* Unit tests for ensuring code reliability
+
+## NPM Packages:
+* Tan-Stack Query
+* Tan-Stack Table
+* React Hook Form
+* Swiper JS
+* React Select
+* React Stripe
+* TipTap Editor
+* HTML to Text
+* Helmet Async
+* Axios Interceptor
+* React Icons
+* React Spinners
+* React Hot Toast
+* Sweet Alert etc.
