@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SectionStart from "../../Components/Shared/SectionStart";
 import { Button, Input, Textarea } from "@material-tailwind/react";
 import Select from "react-select";
@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { ScrollRestoration, useParams } from "react-router-dom";
+import TiptapEditor from "../../Components/TiptapEditor";
 
 const options = [
   { value: "Dog", label: "Dog" },
@@ -20,6 +21,8 @@ const options = [
 
 const UpdatePet = () => {
   const { id } = useParams();
+  const editorRef = useRef();
+  const [description, setDescription] = useState(null);
   const { data: selectedPet, refetch } = useQuery({
     queryKey: ["singlePet", id],
     queryFn: async () => {
@@ -49,9 +52,11 @@ const UpdatePet = () => {
         text: "You just updated this pet!",
         icon: "success",
       });
-      refetch()
+      refetch();
       reset();
       setPreview(null);
+      setDescription(null);
+      editorRef.current.clearContent();
     },
     onError: (err) => {
       toast.error(err.message);
@@ -63,7 +68,7 @@ const UpdatePet = () => {
       petAge: data.petAge || selectedPet?.petAge,
       petLocation: data.petLocation || selectedPet?.petLocation,
       shortDescription: data.shortDescription || selectedPet?.shortDescription,
-      longDescription: data.longDescription || selectedPet?.longDescription,
+      longDescription: description || selectedPet?.longDescription,
       petCategory: selectedOption?.value,
       petImage: preview || selectedPet?.petImage,
       adopted: selectedPet.adopted || false,
@@ -94,7 +99,7 @@ const UpdatePet = () => {
   };
   return (
     <div className="my-10 flex flex-col justify-center">
-      <ScrollRestoration/>
+      <ScrollRestoration />
       <SectionStart heading={`Update Your Pet`} />
       <div className=" p-4 w-full md:w-3/4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -225,7 +230,7 @@ const UpdatePet = () => {
             </div>
           </div>
           <div className="flex flex-col w-full items-center md:flex-row gap-6 mb-5">
-            <div className="flex flex-col w-full">
+            {/* <div className="flex flex-col w-full">
               <Textarea
                 defaultValue={selectedPet?.longDescription}
                 {...register("longDescription")}
@@ -238,6 +243,13 @@ const UpdatePet = () => {
                   Long Description is required
                 </p>
               )}
+            </div> */}
+            <div className="flex flex-col w-full">
+              <TiptapEditor
+                defaultValue={selectedPet?.longDescription}
+                ref={editorRef}
+                setDescription={setDescription}
+              />
             </div>
           </div>
           <Button type="submit" className="bg-[#FF407D] w-full">

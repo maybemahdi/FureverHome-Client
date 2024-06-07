@@ -43,7 +43,7 @@ const CallToAction = () => {
               be filled with moments of joy, laughter, and affection.
             </p>
             <Link
-              to={"/adoptPet"}
+              to={"/petListings"}
               className="px-5 py-4 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform border border-[#FF407D] bg-[#ffffff00] hover:bg-[#FF407D] rounded-md lg:w-auto focus:outline-none focus:bg-gray-500"
             >
               Adopt Now

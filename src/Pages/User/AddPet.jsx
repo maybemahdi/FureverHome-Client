@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SectionStart from "../../Components/Shared/SectionStart";
-import { Button, Input, Textarea } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { ScrollRestoration } from "react-router-dom";
+import TiptapEditor from "../../Components/TiptapEditor";
 
 const options = [
   { value: "Dog", label: "Dog" },
@@ -26,6 +27,8 @@ const AddPet = () => {
     formState: { errors },
   } = useForm();
   const { user } = useAuth();
+  const editorRef = useRef();
+  const [description, setDescription] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [preview, setPreview] = useState(null);
   const [imgLoading, setImgLoading] = useState(false);
@@ -42,7 +45,10 @@ const AddPet = () => {
         icon: "success",
       });
       reset();
+      setDescription(null)
       setPreview(null);
+      setSelectedOption(null);
+      editorRef.current.clearContent();
     },
     onError: (err) => {
       toast.error(err.message);
@@ -51,15 +57,20 @@ const AddPet = () => {
   const onSubmit = async (data) => {
     const petData = {
       ...data,
+      longDescription: description,
       petCategory: selectedOption?.value,
       petImage: preview,
       adopted: false,
       provider: user?.email,
       timestamp: Date.now(),
     };
-    if(!preview) {
-      return toast.error("Please Provide your Pet Image")
+    if (!preview) {
+      return toast.error("Please Provide your Pet Image");
     }
+    if (!description) {
+      return toast.error("Please Provide Long Description");
+    }
+    console.log(petData);
     await mutateAsync(petData);
   };
   const handleImage = async (e) => {
@@ -207,7 +218,7 @@ const AddPet = () => {
             </div>
           </div>
           <div className="flex flex-col w-full items-center md:flex-row gap-6 mb-5">
-            <div className="flex flex-col w-full">
+            {/* <div className="flex flex-col w-full">
               <Textarea
                 {...register("longDescription", { required: true })}
                 color="gray"
@@ -219,6 +230,9 @@ const AddPet = () => {
                   Long Description is required
                 </p>
               )}
+            </div> */}
+            <div className="flex flex-col w-full">
+              <TiptapEditor ref={editorRef} setDescription={setDescription} />
             </div>
           </div>
           <Button type="submit" className="bg-[#FF407D] w-full">

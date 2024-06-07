@@ -8,7 +8,7 @@ import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
-  if (isLoading) return <LoadingSkeleton type={'card'} />;
+  if (isLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <>
       <div className="hidden lg:block">

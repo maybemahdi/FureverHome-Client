@@ -106,7 +106,7 @@ const MyAddedPets = () => {
             onClick={() => handleAdopted(row.original._id)}
             className="bg-[#FF407D] disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400 text-white p-2 rounded hover:bg-[#d15079]"
           >
-            {row.original.adopted ? "Marked as Adopted" : "Mark as Adopted"}
+            {row.original.adopted ? "Adopted" : "Mark as Adopted"}
           </button>
         ),
       },

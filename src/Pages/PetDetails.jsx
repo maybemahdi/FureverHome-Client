@@ -13,6 +13,7 @@ import SectionStart from "../Components/Shared/SectionStart";
 import { useState } from "react";
 import DetailsModal from "../Components/Pet/DetailsModal";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
+import { htmlToText } from "html-to-text";
 const PetDetails = () => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosCommon = useAxiosCommon();
@@ -29,7 +30,7 @@ const PetDetails = () => {
     setIsOpen(false);
   }
 
-  if (isLoading) return <LoadingSkeleton type={'card'} />;
+  if (isLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <div className="my-10">
       <ScrollRestoration />
@@ -37,11 +38,15 @@ const PetDetails = () => {
       <Card className="mt-5 mb-10 flex flex-col lg:flex-row lg:w-[70%] mx-auto">
         <CardHeader
           color="blue-gray"
-          className="relative m-0 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"
+          className="relative m-0 basis-1/2 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"
         >
-          <img className="w-full" src={selectedPet?.petImage} alt="pet-image" />
+          <img
+            className="w-full h-full"
+            src={selectedPet?.petImage}
+            alt="pet-image"
+          />
         </CardHeader>
-        <CardBody className="flex flex-col justify-center">
+        <CardBody className="basis-1/2 flex flex-col justify-center">
           <div className="mb-2 flex flex-col gap-2">
             <Typography color="blue-gray" className="font-medium font-main">
               Name: <span className="font-bold">{selectedPet?.petName}</span>
@@ -66,7 +71,7 @@ const PetDetails = () => {
               <span className="">{selectedPet?.shortDescription}</span>
             </Typography>
             <Typography color="blue-gray" className="font-medium font-main">
-              <span className="">{selectedPet?.longDescription}</span>
+              <span className="">{htmlToText(selectedPet?.longDescription)}</span>
             </Typography>
           </div>
           <Button

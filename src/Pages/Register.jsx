@@ -73,7 +73,7 @@ const Register = () => {
       toast.error(err.message);
     }
   };
-  if (isLoading) return <LoadingSkeleton type={'card'} />;
+  if (loading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="flex justify-center items-center min-h-screen my-10">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-200 text-gray-900">
