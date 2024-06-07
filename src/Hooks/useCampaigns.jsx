@@ -33,7 +33,9 @@ const useCampaigns = () => {
           } else {
             return prev + 1;
           }
-        });
+          });
+          // Adjust scroll position to prevent immediate re-triggering
+          // window.scrollBy(0, -5);
       }
     }
   }, 500); // 500ms delay for debounce

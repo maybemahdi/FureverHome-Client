@@ -1,7 +1,7 @@
 import { ScrollRestoration } from "react-router-dom";
 import SectionStart from "../../Components/Shared/SectionStart";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import useAxiosSecure from "../../Hooks/useAxiosSecure"
 import { Card, Typography } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
@@ -10,7 +10,7 @@ import LoadingSkeleton from "../../Components/LoadingSkeleton";
 const TABLE_HEAD = ["Name", "Email", "Profile Photo", "Action"];
 
 const Users = () => {
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
   const {
     data: users = [],
     isLoading,
@@ -18,7 +18,7 @@ const Users = () => {
   } = useQuery({
     queryKey: ["allUsers"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/users");
+      const { data } = await axiosSecure.get("/users");
       return data;
     },
   });
@@ -34,7 +34,7 @@ const Users = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.patch(`/user/${email}`);
+          const { data } = await axiosSecure.patch(`/user/${email}`);
           if (data.modifiedCount > 0) {
             Swal.fire({
               title: "Success!",

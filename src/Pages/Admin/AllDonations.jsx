@@ -1,6 +1,5 @@
 import { Link, ScrollRestoration } from "react-router-dom";
 import SectionStart from "../../Components/Shared/SectionStart";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FiEdit3 } from "react-icons/fi";
@@ -11,6 +10,7 @@ import Swal from "sweetalert2";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const TABLE_HEAD = [
     "Pet Name",
@@ -22,7 +22,7 @@ const TABLE_HEAD = [
   ];
 
 const AllDonations = () => {
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure()
   const { user } = useAuth();
   const {
     data: campaigns = [],
@@ -31,7 +31,7 @@ const AllDonations = () => {
   } = useQuery({
     queryKey: ["donations", user?.email],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/campaigns`);
+      const { data } = await axiosSecure.get(`/campaigns`);
       return data;
     },
   });
@@ -99,7 +99,7 @@ const AllDonations = () => {
    //delete
    const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
-      const { data } = await axiosCommon.delete(`/campaign/${id}`);
+      const { data } = await axiosSecure.delete(`/campaign/${id}`);
       return data;
     },
     onSuccess: () => {

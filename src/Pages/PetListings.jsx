@@ -19,6 +19,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
 
 const options = [
+  { value: "", label: "All" },
   { value: "Dog", label: "Dog" },
   { value: "Cat", label: "Cat" },
   { value: "Rabbit", label: "Rabbit" },
@@ -60,15 +61,16 @@ const PetListings = () => {
         setScrollLoading(true);
         setPerPage((prev) => {
           if (window.innerWidth >= 768) {
-            return prev + 3;
+            return prev + 2;
           } else {
             return prev + 1;
           }
         });
+        // Adjust scroll position to prevent immediate re-triggering
+        // window.scrollBy(0, -5);
       }
     }
-  }, 500); // 500ms delay for debounce
-  // console.log(perPage);
+  }, 500);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -109,7 +111,7 @@ const PetListings = () => {
       )}
       <div
         data-aos="zoom-in-right"
-        className="flex items-center gap-5 justify-center mt-10 relative z-20"
+        className="flex flex-col md:flex-row items-center gap-5 justify-center mt-10 relative z-10"
       >
         <form onSubmit={handleSearch}>
           <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">

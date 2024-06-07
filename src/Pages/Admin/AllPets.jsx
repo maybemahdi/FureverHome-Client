@@ -1,6 +1,5 @@
 import { Link, ScrollRestoration } from "react-router-dom";
 import SectionStart from "../../Components/Shared/SectionStart";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Card, Typography } from "@material-tailwind/react";
@@ -9,11 +8,12 @@ import { FiEdit3 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const TABLE_HEAD = ["Pet Name", "Pet Image", "Update", "Delete", "Action", "Action"];
 
 const AllPets = () => {
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure()
   const {
     data: allPets = [],
     refetch,
@@ -21,7 +21,7 @@ const AllPets = () => {
   } = useQuery({
     queryKey: ["allPets"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/allPets");
+      const { data } = await axiosSecure.get("/allPets");
       return data;
     },
   });
@@ -29,7 +29,7 @@ const AllPets = () => {
   //delete
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
-      const { data } = await axiosCommon.delete(`/pet/${id}`);
+      const { data } = await axiosSecure.delete(`/pet/${id}`);
       return data;
     },
     onSuccess: () => {

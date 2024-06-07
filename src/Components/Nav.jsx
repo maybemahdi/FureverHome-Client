@@ -120,8 +120,8 @@ const Nav = () => {
   };
 
   return (
-    <Navbar data-aos="zoom-in-right" className="bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
-      <div className="flex items-center justify-between z-20 relative">
+    <Navbar className="bg-[#FFCAD4] text-black top-0 z-20 h-max max-w-full mb-5 rounded-none px-4 py-8 lg:px-8 lg:py-5">
+      <div data-aos="zoom-in-right" className="flex items-center justify-between z-20 relative">
         <Link to={"/"}>
           <img
             className="h-28 absolute top-[-30px] left-[-20px] md:left-0 md:top-[-30px]"
@@ -129,7 +129,7 @@ const Nav = () => {
             alt=""
           />
         </Link>
-        <div className="flex items-center gap-4 mt-1">
+        <div data-aos="zoom-in-right" className="flex items-center gap-4 mt-1">
           <div className="mr-5 hidden lg:block">{navList}</div>
           <div className="flex font-semibold items-center gap-x-4">
             {!user && (
