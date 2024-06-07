@@ -13,10 +13,10 @@ import { NavLink } from "react-router-dom";
 const AdminMenu = () => {
   return (
     <>
-      <h3 className="md:text-center pl-4 md:pl-0 text-xl md:text-2xl font-bold underline">
+      <h3 data-aos="zoom-in-right" className="md:text-center pl-4 md:pl-0 text-xl md:text-2xl font-bold underline">
        Admin Dashboard
       </h3>
-      <nav>
+      <nav data-aos="zoom-in-right">
         {/* admin routes */}
         <NavLink
           to="/dashboard"

@@ -33,7 +33,7 @@ const Faq = () => {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   return (
-    <div className="my-10">
+    <div data-aos="zoom-in-right" className="my-10">
       <SectionStart heading={`Frequently Asked Questions`} subHeading={``} />
       <div className="flex flex-col lg:flex-row gap-8 mt-10">
         <div className="basis-1/2">

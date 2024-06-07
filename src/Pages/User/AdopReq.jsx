@@ -106,7 +106,7 @@ const AdopReq = () => {
       ) : (
         <SectionStart heading={`No Adoption Requests Found!`} />
       )}
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         {myAdoptionReq?.length > 0 && (
           <Card className="h-full w-full mx-auto overflow-scroll lg:overflow-hidden">
             <table className="w-full min-w-max table-auto text-left">

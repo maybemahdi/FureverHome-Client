@@ -205,7 +205,7 @@ const MyAddedPets = () => {
     <div className="my-10 flex flex-col justify-center">
       <ScrollRestoration />
       <SectionStart heading={`My Added Pets`} />
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         <Card className="h-full lg:w-[90%] mx-auto overflow-scroll xl:overflow-hidden">
           <table className="w-full min-w-max table-auto text-left">
             <thead>

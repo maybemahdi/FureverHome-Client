@@ -2,7 +2,7 @@ import SectionStart from "../Shared/SectionStart";
 
 const Features = () => {
   return (
-    <section className="text-base-content">
+    <section data-aos="zoom-in-right" className="text-base-content">
       <div className="container py-10 mx-auto">
         <SectionStart
           heading={`Easy Online Application: Adopt from the Comfort of Your Home`}

@@ -7,7 +7,15 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
-  const { googleLogin, signIn, setUpdate, githubLogin, update, loading, setLoading } = useAuth();
+  const {
+    googleLogin,
+    signIn,
+    setUpdate,
+    githubLogin,
+    update,
+    loading,
+    setLoading,
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogin = async (e) => {
@@ -44,11 +52,13 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div data-aos="zoom-in-right" className="flex justify-center items-center min-h-screen">
       <Helmet>
         <title>Login | FureverHome</title>
       </Helmet>
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div
+        className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+      >
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Log In</h1>
           <p className="text-sm text-gray-600">

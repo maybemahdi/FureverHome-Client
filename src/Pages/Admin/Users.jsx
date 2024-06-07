@@ -58,7 +58,7 @@ const Users = () => {
       ) : (
         <SectionStart heading={`No User Found!`} />
       )}
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         {users?.length > 0 && (
           <Card className="h-full md:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
             <table className="w-full min-w-max table-auto text-left">

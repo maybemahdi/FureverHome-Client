@@ -41,6 +41,7 @@ const PetCategory = () => {
             key={category?.categoryName}
           >
             <Card
+             data-aos="zoom-in-right"
               shadow={false}
               className="relative grid h-[40rem] w-full max-w-[28rem] items-end justify-center overflow-hidden text-center"
             >

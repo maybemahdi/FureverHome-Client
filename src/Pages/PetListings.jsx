@@ -107,7 +107,7 @@ const PetListings = () => {
           subHeading={`Browse through our selection below to meet each unique personality and learn more about their stories. From adorable puppies and kittens to majestic birds and gentle rabbits, there's a furry, feathery, or scaly friend just waiting to bring joy into your life.`}
         />
       )}
-      <div className="flex items-center gap-5 justify-center mt-10">
+      <div data-aos="zoom-in-right" className="flex items-center gap-5 justify-center mt-10">
         <form onSubmit={handleSearch}>
           <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
             <input
@@ -138,7 +138,7 @@ const PetListings = () => {
       {pets?.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
           {pets?.map((pet) => (
-            <Card key={pet?._id}>
+            <Card data-aos="zoom-in-right" key={pet?._id}>
               <CardHeader shadow={false} floated={false} className="h-96">
                 <img
                   src={pet?.petImage}

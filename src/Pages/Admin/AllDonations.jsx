@@ -140,7 +140,7 @@ const AllDonations = () => {
       ) : (
         <SectionStart heading={`No Campaigns Found!`} />
       )}
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         {campaigns?.length > 0 && (
           <Card className="h-full md:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
             <table className="w-full min-w-max table-auto text-left">

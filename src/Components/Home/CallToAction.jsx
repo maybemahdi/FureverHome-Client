@@ -10,7 +10,7 @@ import {
 
 const CallToAction = () => {
   return (
-    <div className="">
+    <div data-aos="zoom-in-right" className="">
       <SectionStart
         heading={`Change a Life Today: Adopt a Pet`}
         subHeading={`Encourages immediate action and emphasizes the impact of adopting a pet`}

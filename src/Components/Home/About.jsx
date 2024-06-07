@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody, Button } from "@material-tailwind/react";
 import SectionStart from "../Shared/SectionStart";
 const About = () => {
   return (
-    <div className="my-20">
+    <div data-aos="zoom-in-right" className="my-20">
       <SectionStart
         heading={`About Us: Saving Lives One Adoption at a Time`}
         subHeading={`At our adoption center, every adoption is a triumph. Our mission is clear: to rescue animals in need, provide them with love and care, and match them with forever homes where they'll thrive`}

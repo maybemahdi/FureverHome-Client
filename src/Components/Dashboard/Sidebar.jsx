@@ -23,7 +23,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-[#FFCAD4] text-gray-800 flex justify-between md:hidden">
+      <div data-aos="zoom-in-right" className="bg-[#FFCAD4] text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer relative top-[-20px] p-4 h-[80px] font-bold">
             <Link to="/">
@@ -54,7 +54,7 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden h-[85px] md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
+            <div data-aos="zoom-in-right" className="w-full hidden h-[85px] md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
               <Link to="/">
                 <img
                   // className='hidden md:block'
@@ -77,7 +77,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div>
+        <div data-aos="zoom-in-right">
           <hr />
 
           {/* Profile Menu */}

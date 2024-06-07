@@ -54,7 +54,7 @@ const MyDonations = () => {
       ) : (
         <SectionStart heading={`No Donation Yet!`} />
       )}
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         {myDonations?.length > 0 && (
           <Card className="h-full md:w-[80%] mx-auto overflow-scroll xl:overflow-hidden">
             <table className="w-full min-w-max table-auto text-left">

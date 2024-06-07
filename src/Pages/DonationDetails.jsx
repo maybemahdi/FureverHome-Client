@@ -54,7 +54,7 @@ const DonationDetails = () => {
       <SectionStart
         heading={`All About ${selectedCampaign?.petName} Campaign`}
       />
-      <Card className="mt-5 grid grid-cols-1 lg:grid-cols-2 lg:w-[70%] mx-auto">
+      <Card data-aos="zoom-in-right" className="mt-5 grid grid-cols-1 lg:grid-cols-2 lg:w-[70%] mx-auto">
         <CardHeader
           color="blue-gray"
           className="relative m-0 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"

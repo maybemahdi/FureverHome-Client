@@ -127,7 +127,7 @@ const AllPets = () => {
     <div className="my-10">
       <ScrollRestoration />
       <SectionStart heading={`Manage all Available Pets Here`} />
-      <div className="my-10">
+      <div data-aos="zoom-in-right" className="my-10">
         <Card className="h-full lg:w-[80%] mx-auto overflow-scroll lg:overflow-hidden">
           <table className="w-full min-w-max table-auto text-left">
             <thead>

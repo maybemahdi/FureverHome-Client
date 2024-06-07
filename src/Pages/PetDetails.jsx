@@ -35,7 +35,7 @@ const PetDetails = () => {
     <div className="my-10">
       <ScrollRestoration />
       <SectionStart heading={`All About ${selectedPet?.petName}`} />
-      <Card className="mt-5 mb-10 flex flex-col lg:flex-row lg:w-[70%] mx-auto">
+      <Card data-aos="zoom-in-right" className="mt-5 mb-10 flex flex-col lg:flex-row lg:w-[70%] mx-auto">
         <CardHeader
           color="blue-gray"
           className="relative m-0 basis-1/2 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"

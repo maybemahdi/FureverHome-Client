@@ -35,7 +35,7 @@ const DonationCampaigns = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-5">
         {donationCampaigns?.map((campaign) => (
-          <Card key={campaign?._id}>
+          <Card data-aos="zoom-in-right" key={campaign?._id}>
             <CardHeader shadow={false} floated={false} className="h-96">
               <img
                 src={campaign?.petImage}

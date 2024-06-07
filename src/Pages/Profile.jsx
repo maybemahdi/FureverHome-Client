@@ -10,7 +10,7 @@ const Profile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="bg-white shadow-lg rounded-2xl w-full md:w-3/5">
+      <div data-aos="zoom-in-right" className="bg-white shadow-lg rounded-2xl w-full md:w-3/5">
         <img
           alt="profile"
           src="https://wallpapercave.com/wp/wp9109600.jpg"
