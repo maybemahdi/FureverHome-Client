@@ -47,7 +47,7 @@ const AllDonations = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.patch(`/pauseCampaign/${id}`, {
+          const { data } = await axiosSecure.patch(`/pauseCampaign/${id}`, {
             status: "paused",
           });
           console.log(data);
@@ -77,7 +77,7 @@ const AllDonations = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.patch(`/resumeCampaign/${id}`, {
+          const { data } = await axiosSecure.patch(`/resumeCampaign/${id}`, {
             status: "running",
           });
           console.log(data);

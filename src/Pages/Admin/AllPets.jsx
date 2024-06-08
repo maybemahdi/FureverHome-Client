@@ -72,7 +72,7 @@ const AllPets = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.patch(`/pet/${id}`, {
+          const { data } = await axiosSecure.patch(`/pet/${id}`, {
             adopted: true,
           });
           if (data.modifiedCount > 0) {
@@ -103,7 +103,7 @@ const AllPets = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosCommon.patch(`/pet/${id}`, {
+          const { data } = await axiosSecure.patch(`/pet/${id}`, {
             adopted: false,
           });
           if (data.modifiedCount > 0) {
