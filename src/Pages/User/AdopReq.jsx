@@ -108,14 +108,14 @@ const AdopReq = () => {
       )}
       <div data-aos="zoom-in-right" className="my-10">
         {myAdoptionReq?.length > 0 && (
-          <Card className="h-full w-full mx-auto overflow-scroll lg:overflow-hidden">
+          <Card className="h-full mx-auto overflow-scroll lg:overflow-hidden">
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
                   {TABLE_HEAD.map((head) => (
                     <th
                       key={head}
-                      className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      className="border-b border-blue-gray-100 bg-blue-gray-50 p-3"
                     >
                       <Typography
                         variant="small"
@@ -142,7 +142,7 @@ const AdopReq = () => {
                     adopted,
                     status,
                   }) => {
-                    const classes = "p-4 border-b border-blue-gray-50";
+                    const classes = "p-3 border-b border-blue-gray-50";
 
                     return (
                       <tr key={name}>
