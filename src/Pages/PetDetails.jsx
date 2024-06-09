@@ -14,6 +14,7 @@ import { useState } from "react";
 import DetailsModal from "../Components/Pet/DetailsModal";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
 import { htmlToText } from "html-to-text";
+import { Helmet } from "react-helmet-async";
 const PetDetails = () => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosCommon = useAxiosCommon();
@@ -33,6 +34,9 @@ const PetDetails = () => {
   if (isLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Pet Details | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart heading={`All About ${selectedPet?.petName}`} />
       <Card data-aos="zoom-in-right" className="mt-5 mb-10 flex flex-col lg:flex-row lg:w-[70%] mx-auto">

@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { ScrollRestoration } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -79,6 +80,9 @@ const CreateDonationCampaign = () => {
   };
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>Create Campaign | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart heading={`Create Donation Campaign`} />
       <div data-aos="zoom-in-right" className=" p-4 w-full md:w-3/4 mx-auto">

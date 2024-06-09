@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import "react-loading-skeleton/dist/skeleton.css";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const options = [
   { value: "", label: "All" },
@@ -102,6 +103,9 @@ const PetListings = () => {
   if (isLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Pet Listings | FureverHome</title>
+      </Helmet>
       {/* <ScrollRestoration /> */}
       {!isLoading && (
         <SectionStart

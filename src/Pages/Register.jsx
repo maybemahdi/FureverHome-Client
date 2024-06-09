@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { FaGithub } from "react-icons/fa";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const {
@@ -76,6 +77,9 @@ const Register = () => {
   if (loading) return <LoadingSkeleton type={'card'} />;
   return (
     <div data-aos="zoom-in-right" className="flex justify-center items-center min-h-screen my-10">
+      <Helmet>
+        <title>Register | FureverHome</title>
+      </Helmet>
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-200 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>

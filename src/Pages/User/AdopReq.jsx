@@ -7,6 +7,7 @@ import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = [
   "Pet Name",
@@ -100,6 +101,9 @@ const AdopReq = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>Adopt Requests | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       {myAdoptionReq?.length > 0 ? (
         <SectionStart heading={`All Adoption Requests`} />

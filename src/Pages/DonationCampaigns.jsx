@@ -14,6 +14,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { useFooterVisibility } from "../FooterVisibilityContext/FooterVisibilityContext";
 import { useEffect } from "react";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const DonationCampaigns = () => {
   const { donationCampaigns, isLoading, allDataLoaded } = useCampaigns();
@@ -28,6 +29,9 @@ const DonationCampaigns = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Donation Campaigns | FureverHome</title>
+      </Helmet>
       {/* <ScrollRestoration /> */}
       <SectionStart
         heading={`All Campaigns Available Here!`}

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = ["Pet Image", "Pet Name", "Donated Amount", "Refund"];
 
@@ -52,6 +53,9 @@ const MyDonations = () => {
   };
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>My Donations | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       {myDonations?.length > 0 ? (
         <SectionStart heading={`My Donations`} />

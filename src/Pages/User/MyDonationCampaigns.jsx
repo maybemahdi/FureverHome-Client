@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import DonatorsModal from "../../Components/Dashboard/DonatorsModal";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = [
   "Pet Name",
@@ -105,6 +106,9 @@ const MyDonationCampaigns = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>My Campaigns | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       {myCamp?.length > 0 ? (
         <SectionStart heading={`My Donation Campaigns`} />

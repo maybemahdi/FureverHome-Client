@@ -6,6 +6,7 @@ import { Card, Typography } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = ["Name", "Email", "Profile Photo", "Action"];
 
@@ -52,6 +53,9 @@ const Users = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>All Users | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       {users?.length > 0 ? (
         <SectionStart heading={`Manage All Users`} />

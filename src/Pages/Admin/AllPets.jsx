@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = ["Pet Name", "Pet Image", "Update", "Delete", "Action", "Action"];
 
@@ -125,6 +126,9 @@ const AllPets = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>All Pets | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart heading={`Manage all Available Pets Here`} />
       <div data-aos="zoom-in-right" className="my-10">

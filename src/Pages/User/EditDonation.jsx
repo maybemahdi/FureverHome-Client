@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { ScrollRestoration, useParams } from "react-router-dom";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 const EditDonation = () => {
   const { id } = useParams();
   const {
@@ -93,6 +94,9 @@ const EditDonation = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>Edit Campaign | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart heading={`Update Donation Campaign`} />
       <div data-aos="zoom-in-right" className=" p-4 w-full md:w-3/4 mx-auto">

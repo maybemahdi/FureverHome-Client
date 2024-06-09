@@ -11,6 +11,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const TABLE_HEAD = [
     "Pet Name",
@@ -134,6 +135,9 @@ const AllDonations = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>All Donations | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       {campaigns?.length > 0 ? (
         <SectionStart heading={`Manage all Donation Campaigns`} />

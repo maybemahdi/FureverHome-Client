@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <div className="flex justify-center items-center my-auto h-[80vh]">
       <Helmet>
-        <title>Profile</title>
+        <title>Profile | FureverHome</title>
       </Helmet>
       <div data-aos="zoom-in-right" className="bg-white shadow-lg rounded-2xl w-full md:w-3/5">
         <img

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import PaymentModal from "../Components/DonationCampaigns/PaymentModal";
 import useCampaigns from "../Hooks/useCampaigns";
 import LoadingSkeleton from "../Components/LoadingSkeleton";
+import { Helmet } from "react-helmet-async";
 
 const DonationDetails = () => {
   const { id } = useParams();
@@ -50,6 +51,9 @@ const DonationDetails = () => {
   if (isLoading || campLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Donation Details | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart
         heading={`All About ${selectedCampaign?.petName} Campaign`}

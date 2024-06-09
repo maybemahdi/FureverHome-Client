@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import LoadingSkeleton from "../../Components/LoadingSkeleton";
 import useAxiosCommon from "../../Hooks/useAxiosCommon"
+import { Helmet } from "react-helmet-async";
 
 const MyAddedPets = () => {
   const { user } = useAuth();
@@ -203,6 +204,9 @@ const MyAddedPets = () => {
   if (isLoading) return <LoadingSkeleton type={'card'} />;
   return (
     <div className="my-10 flex flex-col justify-center">
+      <Helmet>
+        <title>My Pets | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <SectionStart heading={`My Added Pets`} />
       <div data-aos="zoom-in-right" className="my-10">

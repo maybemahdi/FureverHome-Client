@@ -5,10 +5,14 @@ import CallToAction from "../Components/Home/CallToAction";
 import About from "../Components/Home/About";
 import Features from "../Components/Home/Features";
 import Faq from "../Components/Home/Faq";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home | FureverHome</title>
+      </Helmet>
       <ScrollRestoration />
       <Carousel />
       <PetCategory />
