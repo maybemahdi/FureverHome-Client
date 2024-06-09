@@ -19,7 +19,7 @@ const MyDonations = () => {
       return data;
     },
   });
-  const handleRefund = (id) => {
+  const handleRefund = (id, donateId, donatedAmount) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You want to get Refund?",
@@ -30,8 +30,12 @@ const MyDonations = () => {
       confirmButtonText: "Yes, Request it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        const dataForPatch = {
+          donatedAmount: donatedAmount,
+        };
         try {
           const { data } = await axiosCommon.delete(`/deleteDonate/${id}`);
+          await axiosCommon.patch(`/updateTotalDonatedAmount/${donateId}`, dataForPatch)
           if (data.deletedCount > 0) {
             Swal.fire({
               title: "Success!",
@@ -78,7 +82,7 @@ const MyDonations = () => {
               </thead>
               <tbody>
                 {myDonations?.map(
-                  ({ petImage, petName, donatedAmount, _id }) => {
+                  ({ petImage, petName, donatedAmount, _id, donateId }) => {
                     const classes = "p-4 border-b border-blue-gray-50";
 
                     return (
@@ -94,7 +98,9 @@ const MyDonations = () => {
                         <td className={classes}>{donatedAmount}</td>
                         <td className={classes}>
                           <button
-                            onClick={() => handleRefund(_id)}
+                            onClick={() =>
+                              handleRefund(_id, donateId, donatedAmount)
+                            }
                             className="bg-[#FF407D] text-white p-2 rounded"
                           >
                             Ask for Refund
