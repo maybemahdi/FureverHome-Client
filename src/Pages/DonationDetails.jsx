@@ -48,7 +48,7 @@ const DonationDetails = () => {
     }
   }, [donationCampaigns, id]);
 
-  if (isLoading || campLoading) return <LoadingSkeleton type={'card'} />;
+  if (isLoading || campLoading) return <LoadingSkeleton type={"card"} />;
   return (
     <div className="my-10">
       <Helmet>
@@ -58,7 +58,10 @@ const DonationDetails = () => {
       <SectionStart
         heading={`All About ${selectedCampaign?.petName} Campaign`}
       />
-      <Card data-aos="zoom-in-right" className="mt-5 grid grid-cols-1 lg:grid-cols-2 lg:w-[70%] mx-auto">
+      <Card
+        data-aos="zoom-in-right"
+        className="mt-5 grid grid-cols-1 lg:grid-cols-2 lg:w-[70%] mx-auto"
+      >
         <CardHeader
           color="blue-gray"
           className="relative m-0 rounded-b-none lg:rounded-l-lg lg:rounded-r-none"
@@ -116,7 +119,7 @@ const DonationDetails = () => {
             </Typography>
           </div>
           <Button
-          disabled={selectedCampaign?.status === "paused"}
+            disabled={selectedCampaign?.status === "paused"}
             onClick={() => {
               setIsOpen(true);
             }}
