@@ -1,7 +1,6 @@
 # Welcome to the FureverHome!
 ## People can Adopt his/her favorite Pet and are able to donate to a campaign for a Pet. This is a README file showcasing the features and used things of this Pet Adoption Platform.
 
-## Category : assignment12_category_0009
 
 ## Live Site URL:
 
